@@ -1,67 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Inventario y ventas</title>
-	<!-- Tell the browser to be responsive to screen width -->
-	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
-  <!--=============================
-  =            ESTILOS            =
-  ==============================-->
-  
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="views/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="views/bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="views/bower_components/Ionicons/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="views/dist/css/AdminLTE.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-  	folder instead of downloading all of them to reduce the load. -->
-  	<link rel="stylesheet" href="views/dist/css/skins/_all-skins.min.css">
-
-  	<!-- Google Font -->
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
-  	<!--====  End of ESTILOS  ====-->
-
-
-   <!--=====================================
-   =            PLUGINS DE JAVASCRIPT            =
-   ======================================-->
-   
-   <!-- jQuery 3 -->
-   <script src="views/bower_components/jquery/dist/jquery.min.js"></script>
-   <!-- Bootstrap 3.3.7 -->
-   <script src="views/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-   <!-- SlimScroll -->
-   <script src="views/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-   <!-- FastClick -->
-   <script src="views/bower_components/fastclick/lib/fastclick.js"></script>
-   <!-- AdminLTE App -->
-   <script src="views/dist/js/adminlte.min.js"></script>
-   <!-- AdminLTE for demo purposes -->
-   <!-- <script src="views/dist/js/demo.js"></script> -->
-   
-   <!--====  End of PLUGINS DE JAVASCRIPT  ====-->
+	<?php include 'modules/head.php' ?>
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
-	<!-- Site wrapper -->
-	<div class="wrapper">
-		<?php include 'modules/header.php' ?>
-		<?php include 'modules/menu.php' ?>
-		
-		<?php include 'modules/inicio.php' ?>
 
-		<?php include 'modules/footer.php' ?>
+<?php if(isset($_SESSION['iniciarSesion']) and $_SESSION['iniciarSesion']): ?>
+	<body class="hold-transition skin-blue sidebar-mini sidebar-collapse login-page">
+		<!-- Site wrapper -->
+		<div class="wrapper">
+			<?php include 'modules/header.php' ?>
+			<?php include 'modules/menu.php' ?>
 
-	</div>
-	<!-- ./wrapper -->
+			<?php 
+		// PAGINAS DEL SISTEMA
+			$paginas = scandir('views/paginas');
+			unset($paginas[0]);
+			unset($paginas[1]);
+			$paginas = (
+				array_map(
+					function($paginas){
+						return str_replace('.php', '', $paginas);
+					}, 
+					$paginas
+				)
+			); 
+		// 
+			if(isset($_GET['url'])){
+				switch (in_array($_GET['url'], $paginas)) {
+					case true:
+					include "paginas/{$_GET['url']}.php";
+					break;
 
-	<script type="text/javascript" src="views/js/plantilla.js"></script>
-</body>
-</html>
+					case false:
+					include 'paginas/404.php';
+					break;
+				}
+			} else {
+				include 'paginas/inicio.php';
+			}
+			?>
+
+			<?php include 'modules/footer.php' ?>
+		</div>
+		<!-- ./wrapper -->
+		<script type="text/javascript" src="views/js/plantilla.js"></script>
+	</body>
+	<?php else: ?>
+		<?php include 'paginas/login.php' ?>
+	<?php endif; ?>
+
+
+
+	</html>

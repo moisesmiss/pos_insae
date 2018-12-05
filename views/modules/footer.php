@@ -1,3 +1,3 @@
 <footer class="main-footer">
-	<strong>Copyright &copy; <?= date('Y') ?> Todos los derechos reservados</strong>
+	<p>Copyright &copy; <?= date('Y') ?> Todos los derechos reservados</p>
 </footer>

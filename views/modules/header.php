@@ -2,15 +2,15 @@
 	<!--==============================
 	=            LOGOTIPO            =
 	===============================-->
-	<a href="#" class="logo">
+	<a href="inicio" class="logo">
 		<!-- logo mini -->
 		<span class="logo-mini">
-			<i class="fa fa-shopping-bag"></i>
+			<i class="fa fa-shopping-cart"></i>
 		</span>
 
 		<span class="logo-lg">
 			<span>INSAE </span>
-			<i class="fa fa-shopping-bag"></i>
+			<i class="fa fa-shopping-cart"></i>
 		</span>
 	</a>
 	<!--====  End of LOGOTIPO  ====-->
