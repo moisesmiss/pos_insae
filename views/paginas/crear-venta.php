@@ -7,10 +7,10 @@
 		<h1>
 			Crear venta
 		</h1>
-		<ol class="breadcrumb">
+		<!-- <ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
 			<li class="active">Crear venta</li>
-		</ol>
+		</ol> -->
 	</section>
 
 	<!-- Main content -->

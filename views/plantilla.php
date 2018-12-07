@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +8,7 @@
 </head>
 
 
-<?php if(isset($_SESSION['iniciarSesion']) and $_SESSION['iniciarSesion']): ?>
+<?php if(!empty($_SESSION['usuario'])): ?>
 	<body class="hold-transition skin-blue sidebar-mini sidebar-collapse login-page">
 		<!-- Site wrapper -->
 		<div class="wrapper">
@@ -41,10 +44,11 @@
 			}
 			?>
 
-			<?php include 'modules/footer.php' ?>
+			
 		</div>
 		<!-- ./wrapper -->
 		<script type="text/javascript" src="views/js/plantilla.js"></script>
+		<script type="text/javascript" src="views/js/usuarios.js"></script>
 	</body>
 	<?php else: ?>
 		<?php include 'paginas/login.php' ?>

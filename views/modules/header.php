@@ -30,12 +30,12 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<!-- <img src="views/img/usuarios/default/anonymous.png" class="user-image"> -->
 						<i class="fa fa-user"></i>
-						<span class="hidden-xs">Usuario Administrador</span>
+						<span class="hidden-xs">Usuario: <?= $_SESSION['usuario']['nombre'] ?></span>
 					</a>
 					<ul class="dropdown-menu">
 						<li class="user-body">
 							<div class="pull-right">
-								<a href="#" class="btn btn-default btn-flat">Salir</a>
+								<a href="salir" class="btn btn-default btn-flat">Salir</a>
 							</div>
 						</li>
 					</ul>

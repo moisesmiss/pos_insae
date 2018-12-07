@@ -21,11 +21,17 @@
   	<link rel="stylesheet" href="views/dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="views/plugins/iCheck/square/blue.css">
 
-  	<!-- Google Font -->
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <link rel="icon" href="views/img/plantilla/favicon-shopping-cart.ico">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="views/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="views/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
 
-  	<!--====  End of ESTILOS  ====-->
+    <!-- estilos propios -->
+    <link rel="stylesheet" href="views/css/styles.css">
+
+    <!--====  End of ESTILOS  ====-->
 
 
    <!--=====================================
@@ -42,6 +48,14 @@
    <script src="views/bower_components/fastclick/lib/fastclick.js"></script>
    <!-- AdminLTE App -->
    <script src="views/dist/js/adminlte.min.js"></script>
+   <!-- DataTables -->
+   <script src="views/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+   <script src="views/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+   <script src="views/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
+   <script src="views/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
+
+   <!-- sweetalert -->
+   <script src="views/bower_components/sweetalert/sweetalert2.all.min.js"></script>
    <!-- AdminLTE for demo purposes -->
    <!-- <script src="views/dist/js/demo.js"></script> -->
    

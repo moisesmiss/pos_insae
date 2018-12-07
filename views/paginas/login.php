@@ -9,11 +9,11 @@
 
 			<form method="post">
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" placeholder="Usuario" name="ingUsuario" required>
+					<input type="text" class="form-control" placeholder="Usuario" name="ingUsuario" required value="<?= @$_POST['ingUsuario'] ?>">
 					<span class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" class="form-control" placeholder="Contraseña" name="IngPassword" required>
+					<input type="password" class="form-control" placeholder="Contraseña" name="ingPassword" required>
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="row">
@@ -23,6 +23,10 @@
 					</div>
 					<!-- /.col -->
 				</div>
+				<?php
+				$login = new ControllerUsuarios();
+				$login->ctrIngresoUsuario();
+				?>
 			</form>
 
 		</div>
