@@ -123,8 +123,6 @@ $('#formAgregarUsuario').on('submit', function(event){
 		data: datos,
 	})
 	.done(function(respuesta) {
-		console.log("respuesta", respuesta);
-
 		tablaUsuarios.DataTable().ajax.reload();
 		$("#modalAgregarUsuario").modal('hide');
 		form[0].reset();

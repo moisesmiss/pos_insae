@@ -9,6 +9,7 @@ class AjaxUsuarios{
 	public function listar(){
 		$respuesta = ModelUsuario::getAll('view_usuario'); 
 		foreach ($respuesta as $key => $usuario) {
+			$respuesta[$key]['nombre'] = ucfirst($respuesta[$key]['nombre']);
 			$newDate = '';
 			$date = strtotime($respuesta[$key]['ultimo_login']);
 			if($date != false){
