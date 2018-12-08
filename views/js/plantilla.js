@@ -31,10 +31,3 @@ var language = {
 		"sSortDescending": ": Activar para ordenar la columna de manera descendente"
 	}
 }
-
-var options = {
-	"language" : language,
-	"responsive" : true,
-}
-
-$(".tabla-datatable").DataTable(options);

@@ -11,41 +11,26 @@ class ControllerUsuarios{
 
 	public function ctrIngresoUsuario(){
 		if(!empty($_POST)){
-			if(preg_match("/^[a-zA-Z0-9]+$/", $_POST['ingUsuario']) && preg_match("/^[a-zA-Z0-9]+$/", $_POST['ingPassword'])){
-				$campo = 'usuario';
-				$valor = $_POST['ingUsuario'];
+			$campo = 'email';
+			$valor = strtolower($_POST['ingUsuario']);
 
-				$usuario = ModelUsuario::find($this->tabla, $campo, $valor);
+			$usuario = ModelUsuario::login('view_usuario', $campo, $valor);
 
-				if(password_verify($_POST['ingPassword'], $usuario['password'])){
+			if(password_verify($_POST['ingPassword'], $usuario['password'])){
 					// session_start();
-					$_SESSION['usuario'] = $usuario;
-					echo "<script>window.location = 'inicio' </script>";
-					echo "Datos correctos";
-				} else {
-					echo "datos incorrectos";
-				}
+				$_SESSION['usuario'] = $usuario;
 
-
-			}
-		}
-	}
-
-	public function ctrCrearUsuario(){
-		if(!empty($_POST['usuario'])){
-			$datos = $_POST; 
-
-			$respuesta = ModelUsuario::insert($this->tabla, $datos);
-			if($respuesta){
-				$this->alert = 'success';
+				ModelUsuario::actualizarUltimoLogin(
+					$this->tabla, 
+					'id',
+					$usuario['id']
+				);
+				echo "<script>window.location = 'inicio' </script>";
+				echo "Datos correctos";
 			} else {
-				$this->alert = 'error';
+				var_dump($usuario);
+				echo "datos incorrectos";
 			}
 		}
-	}
-
-	public function getAll(){
-		$datos = ModelUsuario::getAll($this->tabla);
-		return $datos;
 	}
 }

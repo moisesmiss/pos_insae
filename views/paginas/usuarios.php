@@ -26,33 +26,17 @@
 				
 			</div>
 			<div class="box-body">
-				<table class="table table-bordered table-striped tabla-datatable dt-responsive nowrap" style="width: 100%;">
+				<table id="dtUsuarios" class="table table-bordered table-striped tabla-datatable dt-responsive nowrap" style="width: 100%;">
 					<thead>
 						<tr>
 							<th>Nombre</th>
 							<th>Usuario</th>
 							<th>Estado</th>
+							<th>Ultimo login</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php
-						$objUsuarios = new ControllerUsuarios;
-						$usuarios = $objUsuarios->getAll();
-						?>
-						<?php foreach ($usuarios as $usuario): ?>
-							<tr>
-								<td><?= $usuario['nombre'] ?></td>
-								<td><?= $usuario['usuario'] ?></td>
-								<td><button class="btn btn-success btn-xs">Activado</button></td>
-								<td>
-									<div class="btn-group">
-										<button class="btn btn-warning btn-editar-usuario" data-toggle="modal" data-target="#modalEditarUsuario" data-id-usuario="<?= $usuario['id'] ?>"><i class="fa fa-pencil"></i></button>
-										<button class="btn btn-danger"><i class="fa fa-times"></i></button>
-									</div>
-								</td>
-							</tr>
-						<?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>
@@ -75,14 +59,13 @@
 <div class="modal fade" id="modalAgregarUsuario" tabindex="-1">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<form method="post"></form>
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">Agregar usuario</h4>
 			</div>
-			<div class="modal-body">
-				<div class="box-body">
-					<form method="post">
+			<form method="post" id="formAgregarUsuario">
+				<div class="modal-body">
+					<div class="box-body">
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -92,8 +75,8 @@
 
 						<div class="form-group">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-key"></i></span>
-								<input type="text" name="usuario" class="form-control" placeholder="Usuario">
+								<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+								<input type="text" name="email" class="form-control" placeholder="Correo">
 							</div>
 						</div>
 
@@ -103,39 +86,14 @@
 								<input type="password" name="password" class="form-control" placeholder="Contraseña">
 							</div>
 						</div>
-
-						<!-- <div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-users"></i></span>
-								<select name="rol" class="form-control">
-									<option value="">Seleccionar perfil</option>
-									<option value="Administrador">Administrador</option>
-									<option value="especial">Especial</option>
-									<option value="vendedor">Vendedor</option>
-								</select>
-							</div>
-						</div> -->
-
-        		<!-- <div class="form-group">
-        			<div class="panel text-uppercase">subir-foto</div>
-        			<input type="file" id="foto" name="foto">
-        			<p class="help-bock">Peso máximo de la foto 2MB</p>
-        			<img src="views/img/usuarios/default/anonymous.png" class="img-thumbnail">
-        		</div> -->
-
-        		
-
-        	</div>
-        </div>
-        <div class="modal-footer">
-        	<button type="submit" class="btn btn-primary">Aceptar</button>
-        </div>
-        <?php 
-        $objUsuarios->ctrCrearUsuario();
-        ?>
-    </form>
-</div>
-</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Aceptar</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 
 <!--====  End of MODAL AGREGAR USUARIO  ====-->
@@ -148,106 +106,72 @@
 <div class="modal fade" id="modalEditarUsuario" tabindex="-1">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<form method="post"></form>
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">Editar usuario</h4>
 			</div>
-			<div class="modal-body">
-				<div class="box-body">
-					<form method="post">
-						<div class="form-group">
-							<label>Usuario</label>
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-user"></i></span>
-								<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre">
-							</div>
+			<form method="post" id="formEditarUsuario">
+				<div class="modal-body">
+					<div class="form-group">
+						<label>Usuario</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-user"></i></span>
+							<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre">
 						</div>
+					</div>
 
-						<div class="form-group">
-							<label>Nombre</label>
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-key"></i></span>
-								<input type="text" id="usuario" name="usuario" class="form-control" placeholder="Usuario">
-							</div>
+					<div class="form-group">
+						<label>Nombre</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-key"></i></span>
+							<input type="text" id="email" name="email" class="form-control" placeholder="Usuario">
 						</div>
+					</div>
 
-						<div class="form-group">
-							<label>Contraseña</label>
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-								<input type="password" name="password" class="form-control" placeholder="Nueva Contraseña">
-							</div>
+					<div class="form-group">
+						<label>Contraseña</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+							<input type="password" name="password" class="form-control" placeholder="Nueva Contraseña">
 						</div>
+					</div>
 
-						<!-- <div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-users"></i></span>
-								<select name="rol" class="form-control">
-									<option value="">Seleccionar perfil</option>
-									<option value="Administrador">Administrador</option>
-									<option value="especial">Especial</option>
-									<option value="vendedor">Vendedor</option>
-								</select>
-							</div>
-						</div> -->
+					<input type="hidden" id="idEditarUsuario" name="persona_id">
+				</div> <!-- /.modal-body -->
 
-        		<!-- <div class="form-group">
-        			<div class="panel text-uppercase">subir-foto</div>
-        			<input type="file" id="foto" name="foto">
-        			<p class="help-bock">Peso máximo de la foto 2MB</p>
-        			<img src="views/img/usuarios/default/anonymous.png" class="img-thumbnail">
-        		</div> -->
-
-        		
-
-        	</div>
-        </div>
-        <div class="modal-footer">
-        	<button type="submit" class="btn btn-primary">Aceptar</button>
-        </div>
-        <?php 
-
-        ?>
-    </form>
-</div>
-</div>
+				<div class="modal-footer">
+					<button type="submit" id="btnEditarUsuario" class="btn btn-primary">Aceptar</button>
+				</div> 
+			</form>
+		</div>
+	</div>
 </div>
 
 <!--====  End of MODAL EDITAR USUARIO  ====-->
 
+<!--============================================
+=            MODAL ELIMINAR USUARIO            =
+=============================================-->
 
-<!--=============================
-=            ALERTAS            =
-==============================-->
+<div class="modal fade" id="modalEliminarUsuario" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">¿Seguro que desea eliminar el usuario?</h4>
+			</div>
+			<form method="post" id="formEliminarUsuario">
+				<div class="modal-body">
+					
+				</div>
+				<div class="modal-footer">
+					<input type="hidden" id="idEliminarUsuario" name="persona_id">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">NO</button>
+					<button type="submit" class="btn btn-danger">SI</button>
+				</div>
+			</form>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
-<?php if(@$objUsuarios->alert == 'success'): ?>
-	<script>
-		swal({
-			type: 'success', 
-			title: 'Datos agregados correctamente',
-			showConfirmButton: true,
-			confirmButtonText: 'Cerrar',
-		}).then((result) => {
-			if(result.value){
-				window.location = 'usuarios';
-			}
-		});
-	</script>
-	<?php elseif(@$objUsuarios->alert == 'error'): ?>
-		<script>
-			swal({
-				type: 'error', 
-				title: 'Error al ingresar datos',
-				showConfirmButton: true,
-				confirmButtonText: 'Cerrar',
-			}).then((result) => {
-				if(result.value){
-					window.location = 'usuarios';
-				}
-			});
-		</script>
-	<?php endif; ?>
-
-	<!--====  End of ALERTAS  ====-->
-
+<!--====  End of MODAL ELIMINAR USUARIO  ====-->
