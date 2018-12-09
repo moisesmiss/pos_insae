@@ -17,7 +17,8 @@ class AjaxUsuarios{
 			}
 			$respuesta[$key]['ultimo_login'] = $newDate;
 		}
-		return json_encode($respuesta);
+		$data['data'] = $respuesta;
+		return json_encode($data);
 	}
 
 	public function agregar(){
@@ -109,9 +110,7 @@ switch ($_GET['action']) {
 	break;
 	
 	case 'listar':
-	$usuarios = $usuario->listar();
-	$data['data'] = $usuarios;
-	echo $data;
+	echo $usuario->listar();
 	break;
 
 	case 'editar':
