@@ -17,18 +17,16 @@ class ControllerUsuarios{
 			$usuario = ModelUsuario::login('view_usuario', $campo, $valor);
 
 			if(password_verify($_POST['ingPassword'], $usuario['password'])){
-					// session_start();
 				$_SESSION['usuario'] = $usuario;
 
 				ModelUsuario::actualizarUltimoLogin(
 					$this->tabla, 
-					'id',
-					$usuario['id']
+					'persona_id',
+					$usuario['persona_id']
 				);
 				echo "<script>window.location = 'inicio' </script>";
 				echo "Datos correctos";
 			} else {
-				var_dump($usuario);
 				echo "datos incorrectos";
 			}
 		}

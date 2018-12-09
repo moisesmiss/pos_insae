@@ -30,7 +30,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<!-- <img src="views/img/usuarios/default/anonymous.png" class="user-image"> -->
 						<i class="fa fa-user"></i>
-						<span class="hidden-xs">Usuario: <?= $_SESSION['usuario']['nombre'] ?></span>
+						<span class="hidden-xs">Usuario: <?= ucfirst($_SESSION['usuario']['nombre']) ?></span>
 					</a>
 					<ul class="dropdown-menu">
 						<li class="user-body">

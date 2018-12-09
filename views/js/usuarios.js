@@ -15,19 +15,19 @@ var options = {
 	{
 		"data" : null,
 		"render" : function(data){
-	if(data.estado == 'Y'){
-	return "<button class='btn btn-success btn-xs btn-estado-usuario' data-value='"+data.estado+"'>Activado</button>";
-} else {
-	return "<button class='btn btn-danger btn-xs btn-estado-usuario' data-value='"+data.estado+"'>Desactivado</button>";
-}
-}
-},
-{"data": "ultimo_login"},
-{
-	"data" : null,
-	"defaultContent" : "<td><div class='btn-group'><button class='btn btn-warning btn-editar-usuario' data-toggle='modal' data-target='#modalEditarUsuario' data-id-usuario=''><i class='fa fa-pencil'></i></button><button data-toggle='modal' data-target='#modalEliminarUsuario' class='btn btn-danger btn-eliminar-usuario'><i class='fa fa-times'></i></button></div></td>"
-}
-]
+			if(data.estado == 'Y'){
+				return "<button class='btn btn-success btn-xs btn-estado-usuario' data-value='"+data.estado+"'>Activado</button>";
+			} else {
+				return "<button class='btn btn-danger btn-xs btn-estado-usuario' data-value='"+data.estado+"'>Desactivado</button>";
+			}
+		}
+	},
+	{"data": "ultimo_login"},
+	{
+		"data" : null,
+		"defaultContent" : "<td><div class='btn-group'><button class='btn btn-warning btn-editar-usuario' data-toggle='modal' data-target='#modalEditarUsuario' data-id-usuario=''><i class='fa fa-pencil'></i></button><button data-toggle='modal' data-target='#modalEliminarUsuario' class='btn btn-danger btn-eliminar-usuario'><i class='fa fa-times'></i></button></div></td>"
+	}
+	]
 }
 
 function getDataUsuario(tbody, table){
@@ -201,22 +201,22 @@ $("#formEliminarUsuario").on("submit", function(event){
 		if(respuesta == 1){
 
 			tablaUsuarios.DataTable().ajax.reload();
-				swal({
-					toast: true,
-					position: 'bottom-end',
-					type: 'success',
-					title: 'Usuario eliminado correctamente',
-					showConfirmButton: false,
-					timer: 3000,
-				});
-			} else {
-				swal({
-					type: 'error',
-					title: respuesta,
-					confirmButtonText: 'Aceptar',
-				});
-			}	
-		});	
-		});
+			swal({
+				toast: true,
+				position: 'bottom-end',
+				type: 'success',
+				title: 'Usuario eliminado correctamente',
+				showConfirmButton: false,
+				timer: 3000,
+			});
+		} else {
+			swal({
+				type: 'error',
+				title: respuesta,
+				confirmButtonText: 'Aceptar',
+			});
+		}	
+	});	
+});
 
 /*=====  End of ELIMINAR USUARIO  ======*/

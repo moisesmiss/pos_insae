@@ -9,7 +9,7 @@ session_start();
 
 
 <?php if(!empty($_SESSION['usuario'])): ?>
-	<body class="hold-transition skin-blue sidebar-mini sidebar-collapse login-page">
+	<body class="hold-transition skin-blue sidebar-mini login-page">
 		<!-- Site wrapper -->
 		<div class="wrapper">
 			<?php include 'modules/header.php' ?>
@@ -49,6 +49,7 @@ session_start();
 		<!-- ./wrapper -->
 		<script type="text/javascript" src="views/js/plantilla.js"></script>
 		<script type="text/javascript" src="views/js/usuarios.js"></script>
+		<script type="text/javascript" src="views/js/perfiles.js"></script>
 	</body>
 	<?php else: ?>
 		<?php include 'paginas/login.php' ?>
