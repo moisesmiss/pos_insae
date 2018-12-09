@@ -78,6 +78,7 @@
 								<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 								<input type="text" name="email" class="form-control" placeholder="Correo">
 							</div>
+							<span class="help-block"></span>
 						</div>
 
 						<div class="form-group">
@@ -126,6 +127,7 @@
 							<span class="input-group-addon"><i class="fa fa-key"></i></span>
 							<input type="text" id="email" name="email" class="form-control" placeholder="Usuario">
 						</div>
+						<span class="help-block"></span>
 					</div>
 
 					<div class="form-group">
@@ -136,10 +138,11 @@
 						</div>
 					</div>
 
-					<input type="hidden" id="idEditarUsuario" name="persona_id">
 				</div> <!-- /.modal-body -->
 
 				<div class="modal-footer">
+					<input type="hidden" id="idEditarUsuario" name="persona_id">
+					<input type="hidden" name="emailActual">
 					<button type="submit" id="btnEditarUsuario" class="btn btn-primary">Aceptar</button>
 				</div> 
 			</form>

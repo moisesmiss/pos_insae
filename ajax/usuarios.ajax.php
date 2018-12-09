@@ -96,6 +96,32 @@ class AjaxUsuarios{
 			return $respuesta;
 		}
 	}
+
+	public function comprobarUsuario(){
+		if(!empty($_POST)){
+			$email = $_POST['email'];
+			$respuesta = Model::find('usuario', 'email', $email);
+			if($respuesta != false){
+				return true;
+			}
+		}
+	}
+
+	public function comprobarUsuarioEditar(){
+		if(!empty($_POST)){
+			$email = $_POST['email'];
+			$emailActual = $_POST['emailActual'];
+
+			$respuesta = Model::find('usuario', 'email', $email);
+			if($respuesta['email'] == $emailActual){
+				return false;
+				exit;
+			}
+			if($respuesta != false){
+				return true;
+			}
+		}
+	}
 }
 
 
@@ -123,6 +149,14 @@ switch ($_GET['action']) {
 
 	case 'cambiar-estado':
 	echo $usuario->cambiarEstado();
+	break;
+
+	case 'comprobar-usuario':
+	echo $usuario->comprobarUsuario();
+	break;
+
+	case 'comprobar-usuario-editar':
+	echo $usuario->comprobarUsuarioEditar();
 	break;
 }
 

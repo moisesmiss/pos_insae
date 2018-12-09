@@ -44,6 +44,7 @@ function getDataUsuario(tbody, table){
 		$("#nombre").val(data.nombre);
 		$("#email").val(data.email);
 		$("#idEditarUsuario").val(data.persona_id);
+		$("#formEditarUsuario").find("input[name=emailActual]").val(data.email);
 	});
 }
 
@@ -220,3 +221,76 @@ $("#formEliminarUsuario").on("submit", function(event){
 });
 
 /*=====  End of ELIMINAR USUARIO  ======*/
+
+/*=======================================================
+=            VALIDAR SI YA EXISTE EL USUARIO            =
+=======================================================*/
+
+$("#formAgregarUsuario input[name=email]").on('keyup' ,function(){
+	var input = $(this);
+
+	var email = input.val();
+	var data = new FormData();
+	data.append('email', email);
+
+
+	$.ajax({
+		url: 'ajax/usuarios.ajax.php?action=comprobar-usuario',
+		type: 'post',
+		contentType:false,
+		cache: false,
+		processData: false,
+		data: data,
+	})
+	.done(function(respuesta) {
+		if(respuesta){
+			input.parents('.form-group').addClass('has-error');
+			input.parents('.form-group').children('.help-block').text('El usuario ya existe');
+			input.parents('form').find('button[type=submit]').attr('disabled', 'true');
+
+		} else {
+			input.parents('.form-group').removeClass('has-error');
+			input.parents('.form-group').children('.help-block').text('');
+			input.parents('form').find('button[type=submit]').removeAttr('disabled')
+		}
+	});
+	
+});
+
+/*=====  End of VALIDAR SI YA EXISTE EL USUARIO  ======*/
+
+/*==========================================================
+=            VALIDAR USUARIO REPETIDO EN EDITAR            =
+==========================================================*/
+
+$("#formEditarUsuario input[name=email]").on('keyup', function(){
+	var input = $(this);
+	var emailActual = $("#formEditarUsuario input[name=emailActual]").val();
+	var email = input.val();
+
+	var data = {
+		email: email,
+		emailActual: emailActual
+	}
+
+	$.ajax({
+		url: 'ajax/usuarios.ajax.php?action=comprobar-usuario-editar',
+		type: 'POST',
+		data: data,
+	})
+	.done(function(respuesta) {
+		if(respuesta){
+			input.parents(".form-group").addClass('has-error');
+			input.parents('.form-group').children('.help-block').text('El correo ya esta en uso');
+			input.parents('form').find('button[type=submit]').attr('disabled', 'true');
+		} else {
+			input.parents(".form-group").removeClass('has-error');
+			input.parents('.form-group').children('.help-block').text('');
+			input.parents('form').find('button[type=submit]').removeAttr('disabled');
+		}
+	});
+	
+});
+
+/*=====  End of VALIDAR USUARIO REPETIDO EN EDITAR  ======*/
+

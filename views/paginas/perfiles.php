@@ -22,7 +22,11 @@
 				<button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarPerfil">Agregar</button>
 			</div>
 			<div class="box-body">
-				<table id="dtPerfiles" class="table table-bordered table-striped tabla-datatable dt-responsive nowrap" style="width: 100%;">
+				<!--====================================
+				=            TABLA PERFILES            =
+				=====================================-->
+				
+				<table id="dtPerfiles" class="table table-bordered table-striped tabla-datatable dt-responsive nowrap">
 					<thead>
 						<tr>
 							<th>Nombre</th>
@@ -32,11 +36,12 @@
 					<tbody>
 					</tbody>
 				</table>
+				
+				<!--====  End of TABLA PERFILES  ====-->
 			</div>
 			<!-- /.box-body -->
 		</div>
 		<!-- /.box -->
-
 	</section>
 	<!-- /.content -->
 </div>
