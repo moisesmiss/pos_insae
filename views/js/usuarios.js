@@ -1,6 +1,4 @@
 var tablaUsuarios = $("#dtUsuarios");
-var btnEstadoUsuario = "";
-btnEstadoUsuario = "<button class='btn btn-success btn-xs'>Activado</button>";
 
 var options = {
 	"destroy" : true,

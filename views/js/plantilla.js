@@ -2,6 +2,33 @@
 =            sidevar menu            =
 =============================================*/
 
+//arregla el problema de los submenus en dispositivos pequeños
+var smallBreakpoint = window.matchMedia('(max-width: 786px)');
+var mediumBreakpoint = window.matchMedia('(max-width: 992px)');
+var changeSizeSmall = mediaQuery => {
+	if(mediaQuery.matches){
+		$("body").removeClass('sidebar-collapse');
+	} else {
+		$("body").addClass('sidebar-collapse');
+	}
+}
+
+var changeSizeMedium = mediaQuery => {
+	if(mediaQuery.matches){
+		$("body").addClass('sidebar-collapse');
+	} else {
+		$("body").removeClass('sidebar-collapse');
+	}
+}
+mediumBreakpoint.addListener(changeSizeMedium);
+changeSizeMedium(mediumBreakpoint);
+
+smallBreakpoint.addListener(changeSizeSmall);
+changeSizeSmall(smallBreakpoint);
+// ----------------------------------------
+
+
+
 $(document).ready(function () {
 	$('.sidebar-menu').tree()
 });

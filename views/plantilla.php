@@ -50,6 +50,7 @@ session_start();
 		<script type="text/javascript" src="views/js/plantilla.js"></script>
 		<script type="text/javascript" src="views/js/usuarios.js"></script>
 		<script type="text/javascript" src="views/js/perfiles.js"></script>
+		<script type="text/javascript" src="views/js/categorias.js"></script>
 	</body>
 	<?php else: ?>
 		<?php include 'paginas/login.php' ?>
