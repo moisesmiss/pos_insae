@@ -53,7 +53,7 @@ class Model{
 	function update($tabla, $datos, $where){
 		$actualizarDatos = '';
 		foreach ($datos as $key => $value) {
-			$actualizarDatos .= "{$key} = '$value', ";
+			$actualizarDatos .= "$key = :$key, ";
 		}
 		$actualizarDatos = trim($actualizarDatos, ', ');
 
@@ -62,6 +62,9 @@ class Model{
 
 		$sql = "update {$tabla} set $actualizarDatos where $campo = '$valor'";
 		$declaracion = Conexion::conectar()->prepare($sql);
+		foreach ($datos as $key => $value) {
+			$declaracion->bindValue(":$key", $value);
+		}
 		return $declaracion->execute();
 	}
 

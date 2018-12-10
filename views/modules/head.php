@@ -27,6 +27,7 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="views/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="views/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="views/plugins/iCheck/all.css">
 
     <!-- estilos propios -->
     <link rel="stylesheet" href="views/css/styles.css">
@@ -53,6 +54,7 @@
    <script src="views/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
    <script src="views/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
    <script src="views/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
+   <script type="text/javascript" src="views/plugins/iCheck/icheck.min.js"></script>
 
    <!-- sweetalert -->
    <script src="views/bower_components/sweetalert/sweetalert2.all.min.js"></script>
