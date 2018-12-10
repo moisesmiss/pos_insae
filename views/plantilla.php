@@ -9,7 +9,7 @@ session_start();
 
 
 <?php if(!empty($_SESSION['usuario'])): ?>
-	<body class="hold-transition skin-blue sidebar-mini login-page">
+	<body class="hold-transition skin-blue fixed sidebar-mini login-page">
 		<!-- Site wrapper -->
 		<div class="wrapper">
 			<?php include 'modules/header.php' ?>
