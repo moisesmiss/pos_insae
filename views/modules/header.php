@@ -33,6 +33,9 @@
 						<span class="hidden-xs">Usuario: <?= ucfirst($_SESSION['usuario']['nombre']) ?></span>
 					</a>
 					<ul class="dropdown-menu">
+						<li class="user-header">
+							<p><?= $_SESSION['usuario']['email'] ?></p>
+						</li>
 						<li class="user-body">
 							<div class="pull-right">
 								<a href="salir" class="btn btn-default btn-flat">Salir</a>
