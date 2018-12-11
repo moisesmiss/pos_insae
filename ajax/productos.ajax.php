@@ -3,7 +3,7 @@ require_once "../models/productos.model.php";
 session_start();
 
 class AjaxCategorias{
-	public $tabla = 'categoria';
+	public $tabla = 'producto';
 
 	public function listar(){
 		$productos = ModelProductos::getAll('view_producto');
@@ -15,15 +15,22 @@ class AjaxCategorias{
 		return json_encode($data);	
 	}
 
-	// public function agregar(){
-	// 	if(!empty($_POST)){
-	// 		$data = [
-	// 			"nombre" => strtolower($_POST['nombre']),
-	// 		];
-	// 		$respuesta = ModelCategorias::insert($this->tabla, $data);
-	// 		return $respuesta;
-	// 	}
-	// }
+	public function agregar(){
+		if(!empty($_POST)){
+			$data = [
+				"codigo" => $_POST['codigo'],
+				"nombre" => strtolower($_POST['nombre']),
+				"descripcion" => $_POST['descripcion'],
+				"imagen" => '',
+				"precio_compra" => $_POST['precio_compra'],
+				"precio_venta" => $_POST['precio_venta'],
+				"stock" => $_POST['stock'],
+				"categoria_id" => $_POST['categoria_id'],
+			];
+			$respuesta = ModelProductos::insert($this->tabla, $data);
+			return $respuesta;
+		}
+	}
 
 	// public function editar(){
 	// 	if(!empty($_POST)){
@@ -58,9 +65,9 @@ switch ($_GET['action']) {
 	echo $producto->listar();
 	break;
 
-	// case 'agregar':
-	// echo $categoria->agregar();
-	// break;
+	case 'agregar':
+	echo $producto->agregar();
+	break;
 
 	// case 'editar':
 	// echo $categoria->editar();

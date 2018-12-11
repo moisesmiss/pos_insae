@@ -1,3 +1,7 @@
+<?php 
+$objCategorias = new ControllerCategorias();
+$categorias = $objCategorias->getAll();
+?>
 <div class="wrapper">
 
 	<!-- Content Wrapper. Contains page content -->
@@ -65,7 +69,7 @@
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title">Agregar Producto</h4>
 			</div>
-			<form method="post" id="formAgregarUsuario" enctype="multipart/form-data">
+			<form method="post" id="formAgregarProducto" enctype="multipart/form-data">
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
@@ -90,7 +94,7 @@
 							<div class="form-group">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-align-left"></i></span>
-									<textarea name="codigo" class="form-control form-textarea" placeholder="Descripcion"></textarea>
+									<textarea name="descripcion" class="form-control form-textarea" placeholder="Descripcion"></textarea>
 								</div>
 							</div>
 						</div>
@@ -100,11 +104,10 @@
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-th"></i></span>
 									<select class="form-control" name="categoria_id">
-										<option>Categoria 1</option>
-										<option>Categoria 2</option>
-										<option>Categoria 3</option>
-										<option>Categoria 4</option>
-										<option>Categoria 5</option>
+										<option value="" selected disabled>Seleccionar categoria</option>
+										<?php foreach($categorias as $categoria): ?>
+											<option value="<?= $categoria['id'] ?>"><?= $categoria['nombre'] ?></option>
+										<?php endforeach; ?>
 									</select>
 								</div>
 							</div>
@@ -132,7 +135,7 @@
 							<div class="form-group">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-arrow-up"></i></span>
-									<input min="0" type="number" class="form-control" name="precio_venta" placeholder="Precio de venta">
+									<input min="0" type="number" class="form-control" name="precio_venta" placeholder="Precio de venta" readonly>
 								</div>
 							</div>
 						</div>
@@ -140,7 +143,7 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<div class="input-group">
-									<input type="number" class="form-control porcentaje" min="0" value="40">
+									<input id="porcentajeUtilidad" type="number" class="form-control porcentaje" min="0" value="40">
 									<span class="input-group-addon"><i class="fa fa-percent"></i></span>
 								</div>
 							</div>
@@ -148,9 +151,9 @@
 
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>
-									<input type="checkbox" class="minimal porcentaje" checked>
-									 <span> Utilizar porcentaje</span>
+								<label id="labelPorcentaje">
+									<input type="checkbox" id="checkPorcentaje" class="minimal porcentaje" checked>
+									<span> Utilizar porcentaje</span>
 								</label>
 							</div>
 						</div>
