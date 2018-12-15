@@ -2,6 +2,14 @@
 require_once "../models/productos.model.php";
 session_start();
 
+function resizeImage($original_image_data, $original_width, $original_height, $new_width, $new_height)
+{
+    $dst_img = ImageCreateTrueColor($new_width, $new_height);
+    imagecolortransparent($dst_img, imagecolorallocate($dst_img, 0, 0, 0));
+    imagecopyresampled($dst_img, $original_image_data, 0, 0, 0, 0, $new_width, $new_height, $original_width, $original_height);
+    return $dst_img;
+}
+
 class AjaxCategorias{
 	public $tabla = 'producto';
 
@@ -16,19 +24,73 @@ class AjaxCategorias{
 	}
 
 	public function agregar(){
+		// var_dump($_POST);
 		if(!empty($_POST)){
+			if($_FILES['imagen']['size'] != 0){
+				// var_dump($_FILES);
+				//subir imagen al servidor
+				list($ancho, $alto) = getimagesize($_FILES['imagen']['tmp_name']);
+				$extension = pathinfo($_FILES['imagen']['name'])['extension'];
+				$filename = pathinfo($_FILES['imagen']['name'])['filename'];
+				$rutaTemporal = $_FILES['imagen']['tmp_name'];
+				$ruta = "../views/img/productos/";
+				$nombreImagenDestino = md5($filename).".".$extension;
+				$rutaDestino = $ruta.$nombreImagenDestino;
+
+				$nuevoAncho = $_POST['x2'] - $_POST['x1'];
+				$nuevoAlto = $_POST['y2'] - $_POST['y1'];
+
+				if($_FILES['imagen']['type'] == 'image/jpeg'){
+					$origen = imagecreatefromjpeg($rutaTemporal);
+					$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+					imagecopyresampled($destino, $origen, 0, 0, $_POST['x1'], $_POST['y1'], $ancho, $alto, $ancho, $alto);
+					imagejpeg($destino, $rutaDestino);
+				}	
+				// fin subir imagen		
+			}
+
 			$data = [
 				"codigo" => $_POST['codigo'],
 				"nombre" => strtolower($_POST['nombre']),
 				"descripcion" => $_POST['descripcion'],
-				"imagen" => '',
+				"imagen" => $nombreImagenDestino ?? '',
 				"precio_compra" => $_POST['precio_compra'],
 				"precio_venta" => $_POST['precio_venta'],
 				"stock" => $_POST['stock'],
-				"categoria_id" => $_POST['categoria_id'],
+				"categoria_id" => !empty($_POST['categoria_id']) ? $_POST['categoria_id'] : null,
 			];
-			$respuesta = ModelProductos::insert($this->tabla, $data);
-			return $respuesta;
+
+			if(empty($_POST['id'])){
+				$respuesta = ModelProductos::insert($this->tabla, $data);
+				if($respuesta){
+					$respuesta = [
+						'respuesta' => $respuesta, 
+						'mensaje' => 'Producto agregado correctamente'
+					];
+				} else {
+					$respuesta = [
+						'respuesta' => false, 
+						'mensaje' => 'Error al agregar producto'
+					];
+				}
+			} else {
+				if(empty($data['imagen'])){
+					$data['imagen'] = ModelProductos::find($this->tabla, 'id', $_POST['id'])['imagen'];
+				}
+				$respuesta = ModelProductos::update($this->tabla, $data, ['id' => $_POST['id']]);
+				if($respuesta){
+					$respuesta = [
+						'respuesta' => $respuesta, 
+						'mensaje' => 'Pruducto editado correctamente'
+					];
+				} else {
+					$respuesta = [
+						'respuesta' => false, 
+						'mensaje' => 'Error al editar producto'
+					];
+				}
+			}
+			return json_encode($respuesta);
 		}
 	}
 

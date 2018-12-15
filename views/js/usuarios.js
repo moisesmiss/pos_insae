@@ -66,8 +66,8 @@ function cambiarEstadoUsuario(tbody, table){
     		data: data,
     	})
     	.done(function(respuesta) {
+    		tablaUsuarios.DataTable().ajax.reload();
     		if(respuesta == 1){
-    			tablaUsuarios.DataTable().ajax.reload();
     		} else {
     			swal({
     				type: 'error',

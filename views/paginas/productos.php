@@ -29,9 +29,9 @@ $categorias = $objCategorias->getAll();
 				<table id="dtProductos" class="table table-bordered table-striped tabla-datatable dt-responsive nowrap" style="width: 100%;">
 					<thead>
 						<tr>
+							<th>Nombre</th>
 							<th>Imagen</th>
 							<th>Código</th>
-							<th>Nombre</th>
 							<th>Descripción</th>
 							<th>Categoría</th>
 							<th>Stock</th>
@@ -104,7 +104,7 @@ $categorias = $objCategorias->getAll();
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-th"></i></span>
 									<select class="form-control" name="categoria_id">
-										<option value="" selected disabled>Seleccionar categoria</option>
+										<option id="categoria_id" value="" selected readonly>Seleccionar categoria</option>
 										<?php foreach($categorias as $categoria): ?>
 											<option value="<?= $categoria['id'] ?>"><?= $categoria['nombre'] ?></option>
 										<?php endforeach; ?>
@@ -126,7 +126,7 @@ $categorias = $objCategorias->getAll();
 							<div class="form-group">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-arrow-down"></i></span>
-									<input min="0" type="number" class="form-control" name="precio_compra" placeholder="Precio de compra">
+									<input min="0" step="any" type="number" class="form-control" name="precio_compra" placeholder="Precio de compra">
 								</div>
 							</div>
 						</div>
@@ -135,7 +135,7 @@ $categorias = $objCategorias->getAll();
 							<div class="form-group">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-arrow-up"></i></span>
-									<input min="0" type="number" class="form-control" name="precio_venta" placeholder="Precio de venta" readonly>
+									<input min="0" step="any" type="number" class="form-control" name="precio_venta" placeholder="Precio de venta" readonly>
 								</div>
 							</div>
 						</div>
@@ -161,16 +161,21 @@ $categorias = $objCategorias->getAll();
 
 
 						<div class="col-md-12">
-							<div class="form-group">
-								<input type="file" id="imagenProducto" name="imagen">
+							<div class="form-group div-prev-img">
+								<input type="file" id="imagenProducto" name="imagen" accept="image/jpeg">
 								<p class="help-block">Peso máximo de la imagen 2MB</p>
-								<img src="views/img/productos/default/anonymous.png" class="img-thumbnail img-responsive" width="100px">
+								<img src="views/img/productos/default/anonymous.png" class="prev-img" style="width: 100%">
+								<input type="hidden" name="x1">
+								<input type="hidden" name="x2">
+								<input type="hidden" name="y1">
+								<input type="hidden" name="y2">
 							</div>
 						</div>
 
 					</div><!-- /.row -->
 				</div><!-- /.modal-body -->
 				<div class="modal-footer">
+					<input type="hidden" name="id">
 					<button type="submit" class="btn btn-primary">Aceptar</button>
 				</div>
 			</form>
