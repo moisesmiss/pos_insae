@@ -161,10 +161,12 @@ $categorias = $objCategorias->getAll();
 
 
 						<div class="col-md-12">
-							<div class="form-group div-prev-img">
+							<div class="form-group">
 								<input type="file" id="imagenProducto" name="imagen" accept="image/jpeg">
 								<p class="help-block">Peso máximo de la imagen 2MB</p>
-								<img src="views/img/productos/default/anonymous.png" class="prev-img" style="width: 100%">
+								<div class="div-prev-img">
+									<img src="views/img/productos/default/anonymous.png" class="prev-img" style="max-width: 80%">
+								</div>
 								<input type="hidden" name="x1">
 								<input type="hidden" name="x2">
 								<input type="hidden" name="y1">

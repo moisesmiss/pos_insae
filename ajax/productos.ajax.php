@@ -34,7 +34,9 @@ class AjaxCategorias{
 				$filename = pathinfo($_FILES['imagen']['name'])['filename'];
 				$rutaTemporal = $_FILES['imagen']['tmp_name'];
 				$ruta = "../views/img/productos/";
-				$nombreImagenDestino = md5($filename).".".$extension;
+
+				$fecha = date('Y-m-d H.i.s ');
+				$nombreImagenDestino = $fecha.md5($filename).".".$extension;
 				$rutaDestino = $ruta.$nombreImagenDestino;
 
 				$nuevoAncho = $_POST['x2'] - $_POST['x1'];
@@ -105,13 +107,13 @@ class AjaxCategorias{
 	// 	}
 	// }
 
-	// public function eliminar(){
-	// 	if(!empty($_POST)){
-	// 		$id = ['id' => $_POST['id']];
-	// 		$respuesta = ModelCategorias::delete($this->tabla, $id);
-	// 		return $respuesta;
-	// 	} 
-	// }
+	public function eliminar(){
+		if(!empty($_POST)){
+			$id = ['id' => $_POST['id']];
+			$respuesta = ModelProductos::delete($this->tabla, $id);
+			return $respuesta;
+		} 
+	}
 
 	
 
@@ -135,9 +137,9 @@ switch ($_GET['action']) {
 	// echo $categoria->editar();
 	// break;
 
-	// case 'eliminar':
-	// echo $categoria->eliminar();
-	// break;
+	case 'eliminar':
+	echo $producto->eliminar();
+	break;
 }
 
 /*=====  End of ACCIONES  ======*/

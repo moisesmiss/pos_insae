@@ -34,9 +34,11 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li class="user-header">
+							<i class="fa fa-user" style="color: white; font-size: 2rem;"></i>
+							<p><?= ucwords($_SESSION['usuario']['nombre']) ?></p>
 							<p><?= $_SESSION['usuario']['email'] ?></p>
 						</li>
-						<li class="user-body">
+						<li class="user-footer">
 							<div class="pull-right">
 								<a href="salir" class="btn btn-default btn-flat">Salir</a>
 							</div>

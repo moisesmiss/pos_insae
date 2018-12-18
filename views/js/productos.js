@@ -8,6 +8,7 @@ function limpiarForm(){
 		$(this).find('form')[0].reset();
 		$("#modalAgregarProducto .modal-title").text('Agregar Producto');
 		$("#modalAgregarProducto .prev-img").attr('src', 'views/img/productos/default/anonymous.png');
+		$("#formAgregarProducto textarea[name=descripcion]").text('');
 		$("#categoria_id").text('Seleccionar Categoria');
 		$("#categoria_id").val('');
 		$("#formAgregarProducto input[name=id]").val('');
@@ -30,7 +31,7 @@ var options = {
 	{
 		"data" : "imagen",
 		"render" : function(data){
-			if(data == '' || !data || data == null){
+			if(data == '' || data === null){
 				return "<img src='views/img/productos/default/anonymous.png' class'img-responsive' width='50px'>";
 			} else {
 				return "<a href='views/img/productos/"+data+"' data-toggle='lightbox'><img src='views/img/productos/"+data+"' class'img-responsive' width='50px'></a>";
@@ -83,7 +84,7 @@ function getDataProducto(tbody, table){
 		$("#modalAgregarProducto .modal-title").text('Editar Producto');
 		$("#formAgregarProducto input[name=codigo]").val(data.codigo);
 		$("#formAgregarProducto input[name=nombre]").val(data.nombre);
-		$("#formAgregarProducto input[name=descripcion]").val(data.descripcion);
+		$("#formAgregarProducto textarea[name=descripcion]").text(data.descripcion);
 		$("#formAgregarProducto input[name=stock]").val(data.stock);
 		$("#formAgregarProducto input[name=precio_compra]").val(data.precio_compra);
 		$("#formAgregarProducto input[name=precio_venta]").val(data.precio_venta);
@@ -166,6 +167,64 @@ $("#formAgregarProducto").on("submit", function(event){
 
 /*=====  End of AGREGAR PRODUCTO  ======*/
 
+/*=========================================
+=            ELIMINAR PRODUCTO            =
+=========================================*/
+
+$("#dtProductos tbody").on('click', '.btn-eliminar-producto', function(){
+	var tr = $(this).closest('tr');
+	if(tr.hasClass('child')){
+		tr = tr.prev();
+	}
+	var data = $("#dtProductos").DataTable().row(tr).data();
+
+	Swal({
+		type: 'warning',
+		title: '¿Seguro que desea eliminar el producto '+data.nombre+'?',
+		text: 'Los registros como ventas relacionados a este producto se eliminarán',
+		confirmButtonText: 'SI',
+		cancelButtonText: 'NO',
+		cancelButtonColor: '#3085d6',
+		confirmButtonColor: '#d33',
+		showCancelButton: true,
+		focusCancel: true,
+	}).then(function(result){
+		if(result.value){
+			$.ajax({
+				url: 'ajax/productos.ajax.php?action=eliminar',
+				type: 'POST',
+				data: data,
+			})
+			.done(function(resultado) {
+				if(resultado == 1){
+					tablaProductos.DataTable().ajax.reload();
+					Swal({
+						type: 'success',
+						title: 'Producto eliminado correctamente',
+						toast: true,
+						showConfirmButton: false,
+						timer: 3000,
+						position: 'bottom-end',
+					});					
+				} else {
+					Swal({
+						type: 'error',
+						title: 'Error al eliminar producto',
+					});
+				}
+			})
+			.fail(function(resultado) {
+				console.log("error", resultado);
+			});
+			
+		}
+
+	});
+});
+
+/*=====  End of ELIMINAR PRODUCTO  ======*/
+
+
 /*================================================================
 =            AGREGAR PRECIO VENTA MEDIANTE PORCENTAJE            =
 ================================================================*/
@@ -226,6 +285,7 @@ $('#imagenProducto').on('change', function(event) {
 		var datosImagen = new FileReader;
 		datosImagen.readAsDataURL(imagen);
 		$(datosImagen).on('load', function(event){
+			// $(".div-prev-img img").css('width', '100%');
 			var rutaImagen = event.target.result;
 
 			img = $(".prev-img");

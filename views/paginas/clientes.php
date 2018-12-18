@@ -1,12 +1,12 @@
 <div class="wrapper">
 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
-		<h1>
-			Administrar clientes
-		</h1>
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1>
+				Administrar clientes
+			</h1>
 		<!-- <ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
 			<li class="active">Administrar clientes</li>
@@ -19,30 +19,105 @@
 		<!-- Default box -->
 		<div class="box">
 			<div class="box-header with-border">
-				<h3 class="box-title">Title</h3>
+				<button data-toggle='modal' data-target='#modalClientes' class="btn btn-primary">Agregar</button>
+			</div>
+			<div class="box-body">
+				<table id="dtClientes" class="table table-bordered table-striped tabla-datatable dt-responsive nowrap" style="width: 100%;">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Email</th>
+							<th>Teléfono</th>
+							<th>Dirección</th>
+							<th>Fecha de nacimiento</th>
+							<th>Total Compras</th>
+							<th>Ultima compra</th>
+							<th>Cliente desde</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<!-- /.box-body -->
+		</div>
+		<!-- /.box -->
 
-				<div class="box-tools pull-right">
-					<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-					title="Collapse">
-					<i class="fa fa-minus"></i></button>
-					<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-						<i class="fa fa-times"></i></button>
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+</div>
+
+<!--===================================================
+=            MODAL AGREGAR/EDITAR CLIENTES            =
+====================================================-->
+
+<div id="modalClientes" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Agregar Cliente</h4>
+			</div>
+			<form id="formClientes">
+				<div class="modal-body">
+					<div class="row">						
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Nombre</label>
+								<div class="input-group">
+									<div class="input-group-addon"><i class="fa fa-user"></i></div>
+									<input type="text" name="nombre" class="form-control">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Correo</label>
+								<div class="input-group">
+									<div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+									<input type="email" name="correo" class="form-control">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Fecha de nacimiento</label>
+								<div class="input-group">
+									<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+									<input type="date" name="fecha_nacimiento" class="form-control">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Numero de teléfono</label>
+								<div class="input-group">
+									<div class="input-group-addon"><i class="fa fa-phone"></i></div>
+									<input type="tel" name="telefono" class="form-control">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Dirección</label>
+								<div class="input-group">
+									<div class="input-group-addon"><i class="fa fa-map-marker"></i></div>
+									<input class="form-control" id="autocomplete" placeholder="Ingresa tu dirección" type="text" autocomplete="off">
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="box-body">
-					Start creating your amazing application!
+				<div class="modal-footer">
+					<button class="btn btn-primary" type="submit">Aceptar</button>
 				</div>
-				<!-- /.box-body -->
-				<div class="box-footer">
-					Footer
-				</div>
-				<!-- /.box-footer-->
-			</div>
-			<!-- /.box -->
+			</form>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
-		</section>
-		<!-- /.content -->
-	</div>
-	<!-- /.content-wrapper -->
-
-  </div>
+<!--====  End of MODAL AGREGAR/EDITAR CLIENTES  ====-->
