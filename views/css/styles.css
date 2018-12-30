@@ -14,3 +14,20 @@
 .pac-container {
     z-index: 1051 !important;
 }
+
+.span-agregar-cliente{
+	padding: 5px;
+}
+
+.pl-0{
+	padding-left: 0 !important;
+}
+
+.pr-0{
+	padding-right: 0 !important;
+}
+
+.px-0{
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}

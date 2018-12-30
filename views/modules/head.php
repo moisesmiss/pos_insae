@@ -63,6 +63,7 @@
    <script type="text/javascript" src="views/plugins/imgareaselect/js/jquery.imgareaselect.pack.js"></script>
    <script type="text/javascript" src="views/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
    <script type="text/javascript" src="views/plugins/input-mask/jquery.inputmask.js"></script>
+   <script type="text/javascript" src="views/plugins/jquery-number-format/jquery.number.min.js"></script>
 
    <!-- sweetalert -->
    <script src="views/bower_components/sweetalert/sweetalert2.all.min.js"></script>

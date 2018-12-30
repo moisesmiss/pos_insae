@@ -1,6 +1,6 @@
 <?php
 class ControllerClientes{
-	public $tabla = 'clientes';
+	public $tabla = 'cliente';
 
 	public function getAll(){
 		return ModelClientes::getAll($this->tabla);

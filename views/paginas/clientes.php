@@ -62,7 +62,7 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title">Agregar Cliente</h4>
 			</div>
-			<form id="formCliente" onsubmit="return false;">
+			<form id="formCliente">
 				<div class="modal-body">
 					<div class="row">						
 						<div class="col-md-6">

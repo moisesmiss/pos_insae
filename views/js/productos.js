@@ -64,7 +64,7 @@ var options = {
 		"defaultContent" : "<td><div class='btn-group'><button class='btn btn-warning btn-editar-producto' data-toggle='modal' data-target='#modalAgregarProducto'><i class='fa fa-pencil'></i></button><button data-toggle='modal' data-target='#modalEliminarProducto' class='btn btn-danger btn-eliminar-producto'><i class='fa fa-times'></i></button></div></td>"
 	}
 	]
-}
+};
 
 
 /*===============================================
