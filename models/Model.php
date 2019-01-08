@@ -2,7 +2,8 @@
 class Model{
 	public function query($sql){
 		$declaracion = Conexion::conectar()->prepare($sql);
-		return $declaracion->execute();
+		$declaracion->execute();
+		return $declaracion->fetchAll();
 	}
 	public function find($tabla, $campo, $valor){
 		$sql = "select * from $tabla where $campo = :$campo";
@@ -39,8 +40,11 @@ class Model{
 		foreach ($datos as $key => &$value) {
 			$declaracion->bindParam(":$key", $value);
 		}
-		$declaracion->execute();
-		return $conexion->lastInsertId();
+		if($declaracion->execute()){
+			return $conexion->lastInsertId();
+		} else {
+			return $sql;
+		}
 	}
 
 	public function getAll($tabla){

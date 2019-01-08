@@ -27,6 +27,7 @@ var options = {
 	{"data" : "correo"},
 	{"data" : "telefono"},
 	{"data" : "direccion"},
+	{"data": "ultima_compra"},
 	{"data" : "fecha_nacimiento"},
 	{"data" : "creado_en"},
 	{

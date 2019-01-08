@@ -53,7 +53,9 @@ session_start();
 		<script type="text/javascript" src="views/js/categorias.js"></script>
 		<script type="text/javascript" src="views/js/productos.js"></script>
 		<script type="text/javascript" src="views/js/clientes.js"></script>
-		<script type="text/javascript" src="views/js/ventas.js"></script>
+		<script type="text/javascript" src="views/js/crear-ventas.js"></script>
+		<script type="text/javascript" src="views/js/administrar-ventas.js"></script>
+		<script type="text/javascript" src="views/js/reportes.js"></script>
 		
 		<!-- API DE GOOGLE MAPS -->
 

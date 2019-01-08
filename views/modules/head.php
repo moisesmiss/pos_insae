@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="views/plugins/jcrop/css/jquery.Jcrop.min.css">
     <link rel="stylesheet" type="text/css" href="views/plugins/imgareaselect/css/imgareaselect-animated.css">
     <link rel="stylesheet" type="text/css" href="views/plugins/ekko-lightbox/ekko-lightbox.css">
+    <link rel="stylesheet" type="text/css" href="views/bower_components/bootstrap-daterangepicker/daterangepicker.css">
 
     <!-- estilos propios -->
     <link rel="stylesheet" href="views/css/styles.css">
@@ -64,6 +65,9 @@
    <script type="text/javascript" src="views/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
    <script type="text/javascript" src="views/plugins/input-mask/jquery.inputmask.js"></script>
    <script type="text/javascript" src="views/plugins/jquery-number-format/jquery.number.min.js"></script>
+   <script type="text/javascript" src="views/bower_components/moment/min/moment-with-locales.min.js"></script>
+   <script type="text/javascript" src="views/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+   <script src="views/bower_components/chart.js/Chart.min.js"></script>
 
    <!-- sweetalert -->
    <script src="views/bower_components/sweetalert/sweetalert2.all.min.js"></script>

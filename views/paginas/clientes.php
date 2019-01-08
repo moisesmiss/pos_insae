@@ -29,9 +29,9 @@
 							<th>Email</th>
 							<th>Teléfono</th>
 							<th>Dirección</th>
+							<th>Ultima compra</th>
 							<th>Fecha de nacimiento</th>
-							<!-- <th>Total Compras</th>
-							<th>Ultima compra</th> -->
+							<!-- <th>Total Compras</th> -->
 							<th>Cliente desde</th>
 							<th>Acciones</th>
 						</tr>
