@@ -1,3 +1,26 @@
+.bg-login{
+  background-color: rgba(0,0,0,.5);
+  /*background-image: url(../img/plantilla/fondo.jpeg);*/
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: color;
+}
+
+.login-logo{
+  color: white;
+}
+
+.login-box-body .login-box-msg{
+  font-size: 2rem;
+}
+
+.login-box-body .olvide-password{
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+}
 .swal2-popup{
 	font-size: 1.3rem !important;
 }

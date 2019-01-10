@@ -1,4 +1,4 @@
-<body class="hold-transition login-page">
+<body class="hold-transition login-page bg-login">
 	<div class="login-box">
 		<div class="login-logo">
 			<span>INSAE </span><i class="fa fa-shopping-cart"></i>
@@ -28,7 +28,7 @@
 				$login->ctrIngresoUsuario();
 				?>
 			</form>
-
+			<a class="olvide-password" href="recuperar-password.php">Olvidé mi contraseña</a>
 		</div>
 		<!-- /.login-box-body -->
 	</div>

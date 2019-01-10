@@ -20,12 +20,9 @@
 			<div class="col-md-12">
 				<div class="box">
 					<div class="box-header with-border">
-						<?php 
-						$dias =cal_days_in_month(CAL_GREGORIAN, 2, 2019);
-						echo "hubo $dias en el mes de enero del 2019";
-						 ?>
 						<h4>Ventas por periodo</h4>
 						<select class="filtro-ventas" id="filtroMonthVentas" name="month">
+							<option selected disabled>Mes</option>
 							<option value="1">Enero</option>
 							<option value="2">Febrero</option>
 							<option value="3">Marzo</option>
@@ -40,6 +37,7 @@
 							<option value="12">Diciembre</option>
 						</select>
 						<select class="filtro-ventas" id="filtroYearVentas" name="year">
+							<option selected disabled>Año</option>
 							<?php 
 							$minYear = Reportes::minYearVentas();
 							$maxYear = Reportes::maxYearVentas();
