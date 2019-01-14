@@ -21,6 +21,7 @@ $total_usuarios = count(Model::getAll('usuario'));
 	</section>
 
 	<!-- Main content -->
+	<?php if($_SESSION['usuario']['perfil'] == 'administrador'): ?>
 	<section class="content">
 		<div class="row">
 
@@ -125,6 +126,16 @@ $total_usuarios = count(Model::getAll('usuario'));
 		</div><!-- /.row -->
 
 	</section>
+	<?php else: ?>
+		<section class="content">
+			<div class="box">
+
+				<div class="box-body">
+					<h2>Bienvenido <?= ucwords($_SESSION['usuario']['nombre']) ?></h2>
+				</div>
+			</div>
+		</section>
+	<?php endif; ?>
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->

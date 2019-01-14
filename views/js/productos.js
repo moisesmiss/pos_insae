@@ -3,6 +3,8 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
 	$(this).ekkoLightbox();
 });
 
+var perfilUsuario = $("#perfilUsuario").val();
+
 function limpiarForm(){
 	$("#modalAgregarProducto").on('hidden.bs.modal', function(){
 		$(this).find('form')[0].reset();
@@ -61,7 +63,13 @@ var options = {
 	{"data" : "creado_en"},
 	{
 		"data" : null,
-		"defaultContent" : "<td><div class='btn-group'><button class='btn btn-warning btn-editar-producto' data-toggle='modal' data-target='#modalAgregarProducto'><i class='fa fa-pencil'></i></button><button data-toggle='modal' data-target='#modalEliminarProducto' class='btn btn-danger btn-eliminar-producto'><i class='fa fa-times'></i></button></div></td>"
+		render : function(){ 
+			if(perfilUsuario == 'administrador'){
+				return "<td><div class='btn-group'><button class='btn btn-warning btn-editar-producto' data-toggle='modal' data-target='#modalAgregarProducto'><i class='fa fa-pencil'></i></button><button data-toggle='modal' data-target='#modalEliminarProducto' class='btn btn-danger btn-eliminar-producto'><i class='fa fa-times'></i></button></div></td>";
+			} else {
+				return "<td><div class='btn-group'><button class='btn btn-warning btn-editar-producto' data-toggle='modal' data-target='#modalAgregarProducto'><i class='fa fa-pencil'></i></button></div></td>";
+			}
+		}
 	}
 	]
 };
@@ -125,7 +133,6 @@ $("#formAgregarProducto").on("submit", function(event){
 	event.preventDefault();
 	var form = $(this);
 	var data = new FormData(this);
-	console.log("data", data);
 
 	$.ajax({
 		url: 'ajax/productos.ajax.php?action=agregar',
@@ -137,7 +144,6 @@ $("#formAgregarProducto").on("submit", function(event){
 		dataType: 'json',
 	})
 	.done(function(respuesta) {
-		console.log("respuesta", respuesta);
 		tablaProductos.DataTable().ajax.reload();
 		
 		if(respuesta.respuesta == true){

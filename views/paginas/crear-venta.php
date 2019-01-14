@@ -24,7 +24,7 @@ $clientes = Model::getAll('view_cliente');
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-user"></i></span>
 										<input type="text" class="form-control" value="<?= ucwords($_SESSION['usuario']['nombre']) ?>" readonly>
-										<input id="vendedor_id" type="hidden" name="vendedor_id" value="<?= $_SESSION['usuario']['id'] ?>">
+										<input id="vendedor_id" type="hidden" name="vendedor_id" value="<?= $_SESSION['usuario']['persona_id'] ?>">
 									</div>
 								</div>
 

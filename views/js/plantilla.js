@@ -30,7 +30,7 @@
 
 
 $(document).ready(function () {
-	$('.sidebar-menu').tree()
+	$('.sidebar-menu').tree();
 });
 
 // iCheck
@@ -63,4 +63,21 @@ var language = {
 		"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
 		"sSortDescending": ": Activar para ordenar la columna de manera descendente"
 	}
+};
+
+function getDataRow(btn){
+	var tr = btn.closest('tr');
+	if(tr.hasClass('child')){
+		tr = tr.prev();
+	}
+	var data = tablaUsuarios.DataTable().row(tr).data();
+	return data;
 }
+
+
+var toast = Swal.mixin({
+  toast: true,
+  position: 'bottom-end',
+  showConfirmButton: false,
+  timer: 3000,
+});

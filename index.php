@@ -14,5 +14,6 @@ require_once 'models/productos.model.php';
 require_once 'models/clientes.model.php';
 require_once 'models/ventas.model.php';
 
-$plantilla = new ControllerPlantilla();
-$plantilla->ctrPlantilla();
+// $plantilla = new ControllerPlantilla();
+// $plantilla->ctrPlantilla();
+ControllerPlantilla::ctrPlantilla();

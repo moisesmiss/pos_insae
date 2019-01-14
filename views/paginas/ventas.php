@@ -31,8 +31,8 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Cliente</th>
 							<th>Vendedor</th>
+							<th>Cliente</th>
 							<th>Forma de pago</th>
 							<th>Neto</th>
 							<th>Total</th>

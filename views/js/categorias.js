@@ -1,4 +1,6 @@
 var tablaCategorias = $("#dtCategorias");
+var perfilUsuario = $("#perfilUsuario").val();
+console.log("perfilUsuario", perfilUsuario);
 
 var options = {
 	"destroy" : true,
@@ -11,10 +13,17 @@ var options = {
 	{"data": "nombre"},
 	{
 		"data" : null,
-		"defaultContent" : "<td><div class='btn-group'><button class='btn btn-warning btn-editar-categoria' data-toggle='modal' data-target='#modalEditarCategoria' data-id-categoria=''><i class='fa fa-pencil'></i></button><button data-toggle='modal' data-target='#modalEliminarCategoria' class='btn btn-danger btn-eliminar-categoria'><i class='fa fa-times'></i></button></div></td>"
+		render : function(){
+			if(perfilUsuario == 'administrador'){
+				return "<td><div class='btn-group'><button class='btn btn-warning btn-editar-categoria' data-toggle='modal' data-target='#modalEditarCategoria' data-id-categoria=''><i class='fa fa-pencil'></i></button><button data-toggle='modal' data-target='#modalEliminarCategoria' class='btn btn-danger btn-eliminar-categoria'><i class='fa fa-times'></i></button></div></td>";
+
+			} else {
+				return "<td><div class='btn-group'><button class='btn btn-warning btn-editar-categoria' data-toggle='modal' data-target='#modalEditarCategoria' data-id-categoria=''><i class='fa fa-pencil'></i></button></div></td>";
+			}
+		} 
 	}
 	]
-}
+};
 
 /*===========================================
 =            GET DATA CATEGORIA             =

@@ -19,6 +19,7 @@
 		<!-- Default box -->
 		<div class="box">
 			<div class="box-header with-border">
+				<input type="hidden" id="perfilUsuario" value="<?= $_SESSION['usuario']['perfil'] ?>">
 				<button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCategoria">Agregar</button>
 			</div>
 			<div class="box-body">

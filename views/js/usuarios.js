@@ -1,3 +1,7 @@
+/*=======================================
+=            LISTAR USUARIOS            =
+=======================================*/
+
 var tablaUsuarios = $("#dtUsuarios");
 
 var options = {
@@ -10,6 +14,7 @@ var options = {
 	"columns" : [
 	{"data": "nombre"},
 	{"data": "email"},
+	{"data": "perfil"},
 	{
 		"data" : null,
 		"render" : function(data){
@@ -23,89 +28,49 @@ var options = {
 	{"data": "ultimo_login"},
 	{
 		"data" : null,
-		"defaultContent" : "<td><div class='btn-group'><button class='btn btn-warning btn-editar-usuario' data-toggle='modal' data-target='#modalEditarUsuario' data-id-usuario=''><i class='fa fa-pencil'></i></button><button data-toggle='modal' data-target='#modalEliminarUsuario' class='btn btn-danger btn-eliminar-usuario'><i class='fa fa-times'></i></button></div></td>"
+		"defaultContent" : "<td>"+
+		"<div class='btn-group'>"+
+		"<button class='btn btn-warning btn-editar-usuario' data-id-usuario=''><i class='fa fa-pencil'></i></button>"+
+		"<button class='btn btn-danger btn-eliminar-usuario'><i class='fa fa-times'></i></button>"+
+		"</div>"+
+		"</td>"
 	}
 	]
-}
-
-function getDataUsuario(tbody, table){
-	$(tbody).on("click", ".btn-editar-usuario", function(){
-		var tr = $(this).closest('tr');
-		//si la tabla esta en su modo responsive
-		if (tr.hasClass('child')) {
-			tr = tr.prev();
-		}
-    	//obtener los datos de la fila en la tabla
-    	var data = table.row(tr).data();
-
-		//rellenar los datos del formulario
-		$("#nombre").val(data.nombre);
-		$("#email").val(data.email);
-		$("#idEditarUsuario").val(data.persona_id);
-		$("#formEditarUsuario").find("input[name=emailActual]").val(data.email);
-	});
-}
-
-function cambiarEstadoUsuario(tbody, table){
-	$(tbody).on("click", ".btn-estado-usuario", function(){
-		var tr = $(this).closest('tr');
-		//si la tabla esta en su modo responsive
-		if (tr.hasClass('child')) {
-			tr = tr.prev();
-		}
-    	//obtener los datos de la fila en la tabla
-    	var data = table.row(tr).data();
-    	data = {
-    		"persona_id" : data.persona_id,
-    		"estado" : data.estado,
-    	}
-
-    	$.ajax({
-    		url: 'ajax/usuarios.ajax.php?action=cambiar-estado',
-    		type: 'post',
-    		data: data,
-    	})
-    	.done(function(respuesta) {
-    		tablaUsuarios.DataTable().ajax.reload();
-    		if(respuesta == 1){
-    		} else {
-    			swal({
-    				type: 'error',
-    				title: respuesta,
-    				confirmButtonText: 'Aceptar',
-    			});
-    		}
-    	});
-
-    });
-}
-
-function getIdUsuario(tbody, table){
-	$(tbody).on("click", ".btn-eliminar-usuario", function(){
-		var tr = $(this).closest('tr');
-		//si la tabla esta en su modo responsive
-		if (tr.hasClass('child')) {
-			tr = tr.prev();
-		}
-    	//obtener los datos de la fila en la tabla
-    	var data = table.row(tr).data();
-    	$("#idEliminarUsuario").val(data.persona_id);
-    });
-}
-
-/*=======================================
-=            LISTAR USUARIOS            =
-=======================================*/
-
-function listarDataTableUsuarios(){
-	var table = tablaUsuarios.DataTable(options);
-	getDataUsuario($("#dtUsuarios tbody"), table);
-	getIdUsuario($("#dtUsuarios tbody"), table);
-	cambiarEstadoUsuario($("#dtUsuarios tbody"), table);
-}
-listarDataTableUsuarios();
+};
+tablaUsuarios.DataTable(options);
 
 /*=====  End of LISTAR USUARIOS  ======*/
+
+/*====================================================
+=            ACTIVAR O DESACTIVAR USUARIO            =
+====================================================*/
+
+$("#dtUsuarios tbody").on('click', '.btn-estado-usuario', function(){
+	var data = getDataRow($(this));
+	data = {
+		"persona_id" : data.persona_id,
+		"estado" : data.estado,
+	};
+
+	$.ajax({
+		url: 'ajax/usuarios.ajax.php?action=cambiar-estado',
+		type: 'post',
+		data: data,
+	})
+	.done(function(respuesta) {
+		tablaUsuarios.DataTable().ajax.reload();
+		if(respuesta == 1){
+		} else {
+			swal({
+				type: 'error',
+				title: respuesta,
+				confirmButtonText: 'Aceptar',
+			});
+		}
+	});
+});
+
+/*=====  End of ACTIVAR O DESACTIVAR USUARIO  ======*/
 
 /*=======================================
 =            AGREGAR USUARIO            =
@@ -125,24 +90,21 @@ $('#formAgregarUsuario').on('submit', function(event){
 		tablaUsuarios.DataTable().ajax.reload();
 		$("#modalAgregarUsuario").modal('hide');
 		form[0].reset();
+
 		if(respuesta == 1){
-			swal({
-				toast: true,
+			toast({
 				type: 'success',
-				title: 'Datos agregados correctamente',
-				position: 'bottom-end',
-				timer: 3000,
-				showConfirmButton: false,
+				title: 'Usuario agregado correctamente',
 			});
 		} else {
-			swal({
+			Swal({
 				type: 'error',
 				title: respuesta,
 				confirmButtonText: 'Aceptar',
 			});
 		}
 	});
-	
+
 });
 
 /*=====  End of AGREGAR USUARIO  ======*/
@@ -150,11 +112,22 @@ $('#formAgregarUsuario').on('submit', function(event){
 /*======================================
 =            EDITAR USUARIO            =
 ======================================*/
+//rellenar formulario
+$("#dtUsuarios tbody").on("click", '.btn-editar-usuario', function(event){
+	$("#modalEditarUsuario").modal();	
+	var data = getDataRow($(this));
 
-$("#formEditarUsuario").on("submit", function(event){
+	$("#formEditarUsuario input[name=nombre]").val(data.nombre);
+	$("#formEditarUsuario input[name=email]").val(data.email);
+	$("#formEditarUsaurio select").val(data.perfil_id);
+	$("#idEditarUsuario").val(data.persona_id);
+	$("#emailActual").val(data.email);
+});
+
+$("#btnEditarUsuario").on('click', function(event){
 	event.preventDefault();
-	var data = $(this).serialize();
-
+	
+	var data = $("#formEditarUsuario").serialize();
 	$.ajax({
 		type : "post",
 		url : "ajax/usuarios.ajax.php?action=editar",
@@ -164,14 +137,9 @@ $("#formEditarUsuario").on("submit", function(event){
 				tablaUsuarios.DataTable().ajax.reload();
 				$("#modalEditarUsuario").modal('hide');
 
-				swal({
-					toast : true,
-					type: 'success', 
-					position: 'bottom-end',
-					title: 'Datos editados correctamente',
-					timer: 3000,
-					showConfirmButton: false,
-					// confirmButtonText: 'Cerrar',
+				toast({
+					type: 'success',
+					title: 'Usuario editado correctamente',
 				});
 			} else {
 				alert("Error al editar");
@@ -186,36 +154,47 @@ $("#formEditarUsuario").on("submit", function(event){
 =            ELIMINAR USUARIO            =
 ========================================*/
 
-$("#formEliminarUsuario").on("submit", function(event){
-	event.preventDefault();
-	var data = $(this).serialize();
-
-	$.ajax({
-		url: 'ajax/usuarios.ajax.php?action=eliminar',
-		type: 'post',
-		data: data,
-	})
-	.done(function(respuesta) {
-		$("#modalEliminarUsuario").modal('hide');
-		if(respuesta == 1){
-
-			tablaUsuarios.DataTable().ajax.reload();
-			swal({
-				toast: true,
-				position: 'bottom-end',
-				type: 'success',
-				title: 'Usuario eliminado correctamente',
-				showConfirmButton: false,
-				timer: 3000,
-			});
-		} else {
-			swal({
-				type: 'error',
-				title: respuesta,
-				confirmButtonText: 'Aceptar',
-			});
-		}	
-	});	
+$('#dtUsuarios tbody').on('click', '.btn-eliminar-usuario', function(){
+	var data = getDataRow($(this));
+	Swal({
+		type: 'warning',
+		title: '¿Seguro que desea eliminar el usuario '+data.nombre+'?',
+		confirmButtonText: 'SI',
+		cancelButtonText: 'NO',
+		cancelButtonColor: '#3085d6',
+		confirmButtonColor: '#d33',
+		showCancelButton: true,
+		focusCancel: true,
+	}).then(function(result){
+		if(result.value){
+			$.ajax({
+				url: 'ajax/usuarios.ajax.php?action=eliminar',
+				type: 'POST',
+				data: data,
+			})
+			.done(function(resultado) {
+				if(resultado == 1){
+					tablaUsuarios.DataTable().ajax.reload();
+					Swal({
+						type: 'success',
+						title: 'Usuario eliminado correctamente',
+						toast: true,
+						showConfirmButton: false,
+						timer: 3000,
+						position: 'bottom-end',
+					});					
+				} else {
+					Swal({
+						type: 'error',
+						title: resultado,
+					});
+				}
+			})
+			.fail(function(resultado) {
+				console.log("error", resultado);
+			});	
+		}
+	});
 });
 
 /*=====  End of ELIMINAR USUARIO  ======*/
@@ -226,18 +205,15 @@ $("#formEliminarUsuario").on("submit", function(event){
 
 $("#formAgregarUsuario input[name=email]").on('keyup' ,function(){
 	var input = $(this);
-
 	var email = input.val();
-	var data = new FormData();
-	data.append('email', email);
+	var data = {
+		"email" : email,
+	};
 
 
 	$.ajax({
 		url: 'ajax/usuarios.ajax.php?action=comprobar-usuario',
 		type: 'post',
-		contentType:false,
-		cache: false,
-		processData: false,
 		data: data,
 	})
 	.done(function(respuesta) {
@@ -249,10 +225,9 @@ $("#formAgregarUsuario input[name=email]").on('keyup' ,function(){
 		} else {
 			input.parents('.form-group').removeClass('has-error');
 			input.parents('.form-group').children('.help-block').text('');
-			input.parents('form').find('button[type=submit]').removeAttr('disabled')
+			input.parents('form').find('button[type=submit]').removeAttr('disabled');
 		}
 	});
-	
 });
 
 /*=====  End of VALIDAR SI YA EXISTE EL USUARIO  ======*/
@@ -269,7 +244,7 @@ $("#formEditarUsuario input[name=email]").on('keyup', function(){
 	var data = {
 		email: email,
 		emailActual: emailActual
-	}
+	};
 
 	$.ajax({
 		url: 'ajax/usuarios.ajax.php?action=comprobar-usuario-editar',
@@ -287,7 +262,7 @@ $("#formEditarUsuario input[name=email]").on('keyup', function(){
 			input.parents('form').find('button[type=submit]').removeAttr('disabled');
 		}
 	});
-	
+
 });
 
 /*=====  End of VALIDAR USUARIO REPETIDO EN EDITAR  ======*/

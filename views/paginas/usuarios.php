@@ -1,3 +1,8 @@
+<?php 
+if($_SESSION['usuario']['perfil'] != 'administrador'){
+	echo '<script>window.location="404"</script>';
+}
+?>
 <div class="wrapper">
 
 	<!-- Content Wrapper. Contains page content -->
@@ -18,8 +23,7 @@
 
 		<!-- Default box -->
 		<div class="box">
-			<div class="box-header with-border">
-				
+			<div class="box-header with-border">				
 				<button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario">
 					Agregar Usuario
 				</button>
@@ -31,6 +35,7 @@
 						<tr>
 							<th>Nombre</th>
 							<th>Usuario</th>
+							<th>Perfil</th>
 							<th>Estado</th>
 							<th>Ultimo login</th>
 							<th>Acciones</th>
@@ -65,28 +70,41 @@
 			</div>
 			<form method="post" id="formAgregarUsuario">
 				<div class="modal-body">
-					<div class="box-body">
-						<div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-user"></i></span>
-								<input type="text" name="nombre" class="form-control" placeholder="Nombre">
-							</div>
+					<div class="form-group">
+						<label>Nombre</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-user"></i></span>
+							<input type="text" name="nombre" class="form-control" placeholder="Nombre">
 						</div>
+					</div>
 
-						<div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-								<input type="text" name="email" class="form-control" placeholder="Correo">
-							</div>
-							<span class="help-block"></span>
+					<div class="form-group">
+						<label>Correo</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+							<input type="text" name="email" class="form-control" placeholder="Correo">
 						</div>
+						<span class="help-block"></span>
+					</div>
 
-						<div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-								<input type="password" name="password" class="form-control" placeholder="Contraseña">
-							</div>
+					<div class="form-group">
+						<label>Contraseña</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+							<input type="password" name="password" class="form-control" placeholder="Contraseña">
 						</div>
+					</div>
+					<?php 
+					$perfiles = Model::getAll('perfil');
+					?>
+					<div class="form-group">
+						<label>Perfil</label>
+						<select class="form-control" name="perfil_id">
+							<option selected disabled required>Seleccionar perfil</option>
+							<?php foreach($perfiles as $perfil): ?>
+								<option value="<?= $perfil['id'] ?>"><?= $perfil['nombre'] ?></option>
+							<?php endforeach; ?>
+						</select>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -138,11 +156,20 @@
 						</div>
 					</div>
 
+					<div class="form-group">
+						<label>Perfil</label>
+						<select class="form-control" name="perfil_id">
+							<?php foreach($perfiles as $perfil): ?>
+								<option value="<?= $perfil['id'] ?>"><?= $perfil['nombre'] ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+
 				</div> <!-- /.modal-body -->
 
 				<div class="modal-footer">
 					<input type="hidden" id="idEditarUsuario" name="persona_id">
-					<input type="hidden" name="emailActual">
+					<input type="hidden" id="emailActual" name="emailActual">
 					<button type="submit" id="btnEditarUsuario" class="btn btn-primary">Aceptar</button>
 				</div> 
 			</form>
@@ -151,30 +178,4 @@
 </div>
 
 <!--====  End of MODAL EDITAR USUARIO  ====-->
-
-<!--============================================
-=            MODAL ELIMINAR USUARIO            =
-=============================================-->
-
-<div class="modal fade" id="modalEliminarUsuario" tabindex="-1">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">¿Seguro que desea eliminar el usuario?</h4>
-			</div>
-			<form method="post" id="formEliminarUsuario">
-				<div class="modal-body">
-					
-				</div>
-				<div class="modal-footer">
-					<input type="hidden" id="idEliminarUsuario" name="persona_id">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">NO</button>
-					<button type="submit" class="btn btn-danger">SI</button>
-				</div>
-			</form>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<!--====  End of MODAL ELIMINAR USUARIO  ====-->
+<script type="text/javascript" src="views/js/usuarios.js"></script>

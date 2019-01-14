@@ -27,8 +27,15 @@ class AjaxUsuarios{
 			$_POST['email'] = strtolower($_POST['email']);
 			$_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-			$datosUsuario = ['email' => $_POST['email'], 'password' => $_POST['password'], 'perfil_id' => 1];
-			$datosPersona = ['nombre' => $_POST['nombre']];
+			$datosUsuario = [
+				'email' => $_POST['email'], 
+				'password' => $_POST['password'], 
+				'perfil_id' => $_POST['perfil_id'],
+			];
+			$datosPersona = [
+				'nombre' => $_POST['nombre'], 
+				'correo' => $_POST['email']
+			];
 
 			if($datosUsuario['email'] == ModelUsuario::find($this->tabla, 'email', $datosUsuario['email'])['email']){
 				return 'El usuario ya existe';
@@ -47,6 +54,7 @@ class AjaxUsuarios{
 			$datosUsuario = [
 				"email" => strtolower($_POST['email']),
 				"password" => $_POST['password'],
+				"perfil_id" => $_POST['perfil_id'],
 			];
 			$datosPersona = ['nombre' => strtolower($_POST['nombre'])];
 
