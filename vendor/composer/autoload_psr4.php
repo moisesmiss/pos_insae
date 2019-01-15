@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Spipu\\Html2Pdf\\' => array($vendorDir . '/spipu/html2pdf/src'),
+    'Mike42\\' => array($vendorDir . '/mike42/escpos-php/src/Mike42'),
 );

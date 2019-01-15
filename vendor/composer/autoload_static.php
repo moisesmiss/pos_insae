@@ -11,12 +11,20 @@ class ComposerStaticInit4da2fa6271ccfcd6f4d25a2794536dcc
         array (
             'Spipu\\Html2Pdf\\' => 15,
         ),
+        'M' => 
+        array (
+            'Mike42\\' => 7,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'Spipu\\Html2Pdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/spipu/html2pdf/src',
+        ),
+        'Mike42\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mike42/escpos-php/src/Mike42',
         ),
     );
 
