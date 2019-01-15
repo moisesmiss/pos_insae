@@ -22,6 +22,59 @@ var options = {
 	"ajax" : {
 		url : "ajax/clientes.ajax.php?action=listar",
 	}, 
+	dom: '<"row"<"col-md-6"B><"col-md-6"f>>'+
+	"<'row'<'col-sm-12'tr>>"+
+	"<'row'<'col-sm-6'i><'col-sm-6'p>>",
+	buttons: {
+		dom : {
+			button : {
+				tag: 'button',
+				className: 'btn',
+			},
+			container: {
+				className: 'btn-group',
+			}
+		},
+		buttons:[
+		{
+			extend: 'excelHtml5',
+			text: '<i class="fa fa-file-excel-o"></i>',
+			className: 'btn-success',
+			titleAttr: 'Exportar datos en Excel',
+			filename: 'clientes',
+			exportOptions : {
+				columns : ':visible :not(:last-child)',
+			},
+		},
+		{
+			extend: 'pdfHtml5',
+			text: '<i class="fa fa-file-pdf-o"></i>',
+			className: 'btn-danger',
+			titleAttr: 'Exportar datos en PDF',
+			filename: 'clientes',
+			exportOptions : {
+				columns : ':visible :not(:last-child)',
+			},
+		},
+		{
+			extend: 'csvHtml5',
+			text: '<i class="fa fa-file-text-o"></i>',
+			className: 'btn-primary',
+			titleAttr: 'Exportar datos en CSV',
+			filename: 'clientes',
+			exportOptions : {
+				columns : ':visible :not(:last-child)',
+			},
+		},
+		{
+			extend: 'colvis',
+			text: '<i class="fa fa-eye"></i>',
+			titleAttr: 'Columnas visibles',
+			className: 'btn-default',
+			columns: [':not(:last-child)'],
+		},
+		]
+	},
 	"columns" : [
 	{"data" : "nombre"},
 	{"data" : "correo"},
@@ -35,7 +88,7 @@ var options = {
 		"defaultContent" : "<td><div class='btn-group'><button class='btn btn-warning btn-editar-cliente' data-toggle='modal' data-target='#modalCliente'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btn-eliminar-cliente'><i class='fa fa-times'></i></button></div></td>"
 	}
 	]
-}
+};
 tablaClientes.DataTable(options);
 
 /*=====  End of LISTAR CLIENTES  ======*/
@@ -96,12 +149,12 @@ $("#dtClientes tbody").on('click', '.btn-editar-cliente', function(){
 		tr = tr.prev();
 	}
 	var data = tablaClientes.DataTable().row(tr).data();
+	var fechaNacimiento = moment(data.fecha_nacimiento, 'DD/MM/YYYY').format('YYYY-MM-DD');
 
 	$("#modalCliente .modal-title").text('Editar cliente');
 	$('#formCliente input[name=nombre]').val(data.nombre);
 	$('#formCliente input[name=correo]').val(data.correo);
-	$('#formCliente input[name=fecha_nacimiento]').val(data.fecha_nacimiento);
-	$('#formCliente input[name=fecha_nacimiento]').val(data.fecha_nacimiento);
+	$('#formCliente input[name=fecha_nacimiento]').val(fechaNacimiento);
 	$('#formCliente input[name=telefono]').val(data.telefono);
 	$('#formCliente input[name=direccion]').val(data.direccion);
 	$("#formCliente input[name=id]").val(data.id);

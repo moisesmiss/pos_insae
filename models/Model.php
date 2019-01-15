@@ -12,6 +12,13 @@ class Model{
 		$declaracion->execute();
 		return $declaracion->fetch(PDO::FETCH_ASSOC);
 	}
+	public function findAll($tabla, $campo, $valor){
+		$sql = "select * from $tabla where $campo = :$campo";
+		$declaracion = Conexion::conectar()->prepare($sql);
+		$declaracion->bindParam(":$campo", $valor, PDO::PARAM_STR);
+		$declaracion->execute();
+		return $declaracion->fetchAll(PDO::FETCH_ASSOC);
+	}
 
 	public function insert($tabla, $datos){
 		$campos = implode(', ', array_keys($datos));

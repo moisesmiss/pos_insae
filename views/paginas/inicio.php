@@ -2,7 +2,7 @@
 $total_clientes = count(Model::getAll('cliente'));
 $total_productos = count(Model::getAll('producto'));
 $total_categorias = count(Model::getAll('categoria'));
-$total_usuarios = count(Model::getAll('usuario'));
+$total_vendedores = count(Model::findAll('view_usuario', 'perfil', 'vendedor'));
 ?>
 <div class="wrapper">
 
@@ -29,7 +29,7 @@ $total_usuarios = count(Model::getAll('usuario'));
 				<!-- small box -->
 				<div class="small-box bg-orange">
 					<div class="inner">
-						<h3><?= $total_usuarios ?></h3>
+						<h3><?= $total_vendedores ?></h3>
 
 						<p>Vendedores</p>
 					</div>
@@ -89,11 +89,14 @@ $total_usuarios = count(Model::getAll('usuario'));
 		<!-- Default box -->
 		<div class="row">					
 			<div class="col-md-12">
-				<div class="box">
+				<div class="box box-solid box-primary">
 					<div class="box-header with-border">
 						<h4>Ventas por periodo</h4>
+					</div>
+					<div class="box-body">
 						<select class="filtro-ventas" id="filtroMonthVentas" name="month">
 							<option selected disabled>Mes</option>
+							<option value="todos">Todos</option>
 							<option value="1">Enero</option>
 							<option value="2">Febrero</option>
 							<option value="3">Marzo</option>
@@ -117,19 +120,15 @@ $total_usuarios = count(Model::getAll('usuario'));
 								<option value="<?= $i ?>"><?= $i ?></option>
 							<?php endfor; ?>
 						</select>
-					</div>
-					<div class="box-body">
-						<canvas id="ventasPorPeriodo"></canvas>
+						<canvas id="graficaVentas"></canvas>
 					</div><!-- /.box -->
 				</div><!-- /.box-body -->
 			</div>
 		</div><!-- /.row -->
-
 	</section>
 	<?php else: ?>
 		<section class="content">
-			<div class="box">
-
+			<div class="box box-primary">
 				<div class="box-body">
 					<h2>Bienvenido <?= ucwords($_SESSION['usuario']['nombre']) ?></h2>
 				</div>

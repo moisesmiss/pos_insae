@@ -10,7 +10,60 @@ var options = {
 	"responsive" : true,
 	"ajax" : {
 		url : "ajax/usuarios.ajax.php?action=listar",
-	}, 
+	},
+	dom: '<"row"<"col-md-6"B><"col-md-6"f>>'+
+	"<'row'<'col-sm-12'tr>>"+
+	"<'row'<'col-sm-6'i><'col-sm-6'p>>",
+	buttons: {
+		dom : {
+			button : {
+				tag: 'button',
+				className: 'btn',
+			},
+			container: {
+				className: 'btn-group',
+			}
+		},
+		buttons:[
+		{
+			extend: 'excelHtml5',
+			text: '<i class="fa fa-file-excel-o"></i>',
+			className: 'btn-success',
+			titleAttr: 'Exportar datos en Excel',
+			filename: 'usuarios',
+			exportOptions : {
+				columns : ':visible :not(:last-child)',
+			},
+		},
+		{
+			extend: 'pdfHtml5',
+			text: '<i class="fa fa-file-pdf-o"></i>',
+			className: 'btn-danger',
+			titleAttr: 'Exportar datos en PDF',
+			filename: 'usuarios',
+			exportOptions : {
+				columns : ':visible :not(:last-child)',
+			},
+		},
+		{
+			extend: 'csvHtml5',
+			text: '<i class="fa fa-file-text-o"></i>',
+			className: 'btn-primary',
+			titleAttr: 'Exportar datos en CSV',
+			filename: 'usuarios',
+			exportOptions : {
+				columns : ':visible :not(:last-child)',
+			},
+		},
+		{
+			extend: 'colvis',
+			text: '<i class="fa fa-eye"></i>',
+			titleAttr: 'Columnas visibles',
+			className: 'btn-default',
+			columns: [':not(:last-child)'],
+		},
+		]
+	},
 	"columns" : [
 	{"data": "nombre"},
 	{"data": "email"},

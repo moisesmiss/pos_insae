@@ -1,6 +1,5 @@
 var tablaCategorias = $("#dtCategorias");
 var perfilUsuario = $("#perfilUsuario").val();
-console.log("perfilUsuario", perfilUsuario);
 
 var options = {
 	"destroy" : true,

@@ -1,6 +1,9 @@
-var ctx = document.getElementById("ventasPorPeriodo").getContext('2d');
+/*========================================
+=            NUMERO DE VENTAS            =
+========================================*/
 
-function graficaVentas(data){
+var divGraficaVentas = document.getElementById("graficaVentas").getContext('2d');
+function imprimirGraficaVentas(data){
     $.ajax({
         url: 'ajax/reportes.ajax.php?action=filtro-ventas',
         type: 'POST',
@@ -8,8 +11,15 @@ function graficaVentas(data){
         data: data,
     })
     .done(function(r) {
-        console.log("success",r);
-        var myChart = new Chart(ctx, {
+        // console.log("success",r);  
+        //dar formato a los meses  
+        if(moment(r.labels[0], 'MM/YYYY', true).isValid()){
+            for(var i = 0; i < r.labels.length; i++){
+                r.labels[i] = moment(r.labels[i], 'MM/YYYY').format('MMM');
+            }
+
+        }
+        var myChart = new Chart(divGraficaVentas, {
             type: 'line',
             data: {
                 labels: r.labels,
@@ -48,7 +58,7 @@ function graficaVentas(data){
         console.log("error", r.responseText);
     }); 
 }
-graficaVentas();
+imprimirGraficaVentas();
 
 $(".filtro-ventas").on('change', function(){
     var month = $('#filtroMonthVentas').val();
@@ -58,6 +68,9 @@ $(".filtro-ventas").on('change', function(){
         year : year,
     };
 
-    graficaVentas(data);
+    imprimirGraficaVentas(data);
 
 });
+
+/*=====  End of NUMERO DE VENTAS  ======*/
+

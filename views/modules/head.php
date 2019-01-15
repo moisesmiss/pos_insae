@@ -58,6 +58,17 @@
    <script src="views/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
    <script src="views/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
    <script src="views/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
+   <script src="views/bower_components/datatables.net/js/dataTables.buttons.min.js"></script>
+   <script src="views/bower_components/datatables.net/js/buttons.flash.min.js"></script>
+   <script src="views/bower_components/datatables.net/js/jszip.min.js"></script>
+   <script src="views/bower_components/datatables.net/js/pdfmake.min.js"></script>
+   <script src="views/bower_components/datatables.net/js/vfs_fonts.js"></script>
+   <script src="views/bower_components/datatables.net/js/buttons.html5.min.js"></script>
+   <script src="views/bower_components/datatables.net/js/buttons.print.min.js"></script>
+   <script src="views/bower_components/datatables.net/js/buttons.colVis.min.js"></script>
+   <script type="text/javascript" src="views/bower_components/datatables.net/js/buttons.bootstrap.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="views/bower_components/datatables.net/css/buttons.bootstrap.min.css">
+
    <script type="text/javascript" src="views/plugins/iCheck/icheck.min.js"></script>
    <script type="text/javascript" src="views/plugins/jcrop/js/jquery.Jcrop.min.js"></script>
    <script type="text/javascript" src="views/plugins/imgareaselect/js/jquery.imgareaselect.min.js"></script>
