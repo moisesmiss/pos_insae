@@ -394,3 +394,36 @@ $("#listaProductos").on('focus', '.no-focus', function(){
 });
 
 /*=====  End of EVITAR FOCO EN INPUT  ======*/
+
+
+
+/*========================================================
+=            EVITAR VENDER SIN CONFIGURAR IVA            =
+========================================================*/
+
+(function(){
+	$.ajax({
+		url: 'ajax/configuracion.ajax.php?action=obtener',
+		dataType: 'json',
+	})
+	.done(function(r) {
+		// console.log("success", r);
+		if(r.iva === '' || r.iva == 0){
+			Swal({
+				type: 'error',
+				title: 'Configuré el iva antes de vender',
+			}).then(function(r){
+				window.location = 'configuracion';
+				
+			});
+		} else {
+			$('#impuestoVenta').val(r.iva);
+		}
+	})
+	.fail(function(r) {
+		console.log("error", r);
+	});
+	
+})();
+
+/*=====  End of EVITAR VENDER SIN CONFIGURAR IVA  ======*/

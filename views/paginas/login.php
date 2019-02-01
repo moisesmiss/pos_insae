@@ -1,7 +1,10 @@
+<?php 
+@$configuracion = Model::getAll('configuracion')[0];
+?>
 <body class="hold-transition login-page bg-login">
 	<div class="login-box">
 		<div class="login-logo">
-			<span>INSAE </span><i class="fa fa-shopping-cart"></i>
+			<span><?= !empty($configuracion['nombre_corto_empresa']) ? $configuracion['nombre_corto_empresa'] : 'POS' ?> </span><i class="fa fa-shopping-cart"></i>
 		</div>
 		<!-- /.login-logo -->
 		<div class="login-box-body">

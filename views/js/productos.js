@@ -1,3 +1,4 @@
+
 $(document).on('click', '[data-toggle="lightbox"]', function(event) {
 	event.preventDefault();
 	$(this).ekkoLightbox();
@@ -11,13 +12,16 @@ function limpiarForm(){
 		$("#modalAgregarProducto .modal-title").text('Agregar Producto');
 		$("#modalAgregarProducto .prev-img").attr('src', 'views/img/productos/default/anonymous.png');
 		$("#formAgregarProducto textarea[name=descripcion]").text('');
-		$("#categoria_id").text('Seleccionar Categoria');
+		$("#categoria_id").text('Seleccionar');
 		$("#categoria_id").val('');
+		$("#proveedor").text('Seleccionar');
+		$("#proveedor").val('');
 		$("#formAgregarProducto input[name=id]").val('');
 		var ias = $(".prev-img").imgAreaSelect({instance: true});
 		ias.cancelSelection();
 	});
 }
+
 
 var tablaProductos = $("#dtProductos");
 
@@ -97,6 +101,7 @@ var options = {
 	{"data": "codigo"},
 	{"data" : "descripcion"},
 	{"data" : "categoria"},
+	{"data" : "proveedor"},
 	{
 		"data" : 'stock',
 		"render": function(data, type, row, meta){
@@ -150,9 +155,12 @@ function getDataProducto(tbody, table){
 		$("#formAgregarProducto input[name=stock]").val(data.stock);
 		$("#formAgregarProducto input[name=precio_compra]").val(data.precio_compra);
 		$("#formAgregarProducto input[name=precio_venta]").val(data.precio_venta);
-		$("#porcentajeUtilidad").val(data.precio_venta / data.precio_compra * 100 - 100);
+		$("#porcentajeUtilidad").val(Math.round(data.precio_venta / data.precio_compra * 100 - 100));
 		$("#categoria_id").text(data.categoria);
 		$("#categoria_id").val(data.categoria_id);
+		$("#proveedor_id").text(data.proveedor);
+		$("#proveedor_id").val(data.proveedor_id);
+
 		$("#formAgregarProducto input[name=id]").val(data.id);
 		if(data.imagen == ''){
 			$(".prev-img").attr('src', 'views/img/productos/default/anonymous.png');
@@ -342,7 +350,7 @@ $('#imagenProducto').on('change', function(event) {
 			title: 'Imagen muy pesada, elija una imagen menor a 2MB',
 		});
 	} else {
-		var datosImagen = new FileReader;
+		var datosImagen = new FileReader();
 		datosImagen.readAsDataURL(imagen);
 		$(datosImagen).on('load', function(event){
 			// $(".div-prev-img img").css('width', '100%');

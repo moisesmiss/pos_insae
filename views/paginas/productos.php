@@ -1,6 +1,8 @@
 <?php 
 $objCategorias = new ControllerCategorias();
 $categorias = $objCategorias->getAll();
+
+$proveedores = Model::getAll('view_proveedor');
 ?>
 <div class="wrapper">
 
@@ -35,6 +37,7 @@ $categorias = $objCategorias->getAll();
 							<th>Código</th>
 							<th>Descripción</th>
 							<th>Categoría</th>
+							<th>Proveedor</th>
 							<th>Stock</th>
 							<th>Precio compra</th>
 							<th>Precio venta</th>
@@ -75,6 +78,7 @@ $categorias = $objCategorias->getAll();
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
+								<label>Código</label>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-barcode"></i></span>
 									<input type="text" name="codigo" class="form-control" placeholder="Codigo">
@@ -84,15 +88,17 @@ $categorias = $objCategorias->getAll();
 
 						<div class="col-md-6">
 							<div class="form-group">
+								<label>Nombre</label>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-archive"></i></span>
-									<input type="text" name="nombre" class="form-control" placeholder="Nombre">
+									<input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
 								</div>
 							</div>
 						</div>
 
 						<div class="col-md-12">
 							<div class="form-group">
+								<label>Descripción</label>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-align-left"></i></span>
 									<textarea name="descripcion" class="form-control form-textarea" placeholder="Descripcion"></textarea>
@@ -100,12 +106,29 @@ $categorias = $objCategorias->getAll();
 							</div>
 						</div>
 
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="form-group">
+								<label>Proveedor *</label>
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-th"></i></span>
+									<select class="form-control" name="proveedor_id" required>
+										<option id="proveedor_id" value="" selected readonly>Seleccionar</option>
+										<?php foreach($proveedores as $proveedor): ?>
+											<option value="<?= $proveedor['id'] ?>"><?= $proveedor['nombre'] ?></option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Categoría</label>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-th"></i></span>
 									<select class="form-control" name="categoria_id">
-										<option id="categoria_id" value="" selected readonly>Seleccionar categoria</option>
+										<option id="categoria_id" value="" selected readonly>Seleccionar</option>
 										<?php foreach($categorias as $categoria): ?>
 											<option value="<?= $categoria['id'] ?>"><?= $categoria['nombre'] ?></option>
 										<?php endforeach; ?>
@@ -114,8 +137,9 @@ $categorias = $objCategorias->getAll();
 							</div>
 						</div>
 
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="form-group">
+								<label>Stock</label>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-check"></i></span>
 									<input min="0" type="number" class="form-control" name="stock" placeholder="Stock">
@@ -125,6 +149,7 @@ $categorias = $objCategorias->getAll();
 
 						<div class="col-md-4">
 							<div class="form-group">
+								<label>Precio de compra</label>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-arrow-down"></i></span>
 									<input min="0" step="any" type="number" class="form-control" name="precio_compra" placeholder="Precio de compra">
@@ -134,6 +159,7 @@ $categorias = $objCategorias->getAll();
 
 						<div class="col-md-4">
 							<div class="form-group">
+								<label>Precio de venta</label>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-arrow-up"></i></span>
 									<input min="0" step="any" type="number" class="form-control" name="precio_venta" placeholder="Precio de venta" readonly>
@@ -143,6 +169,7 @@ $categorias = $objCategorias->getAll();
 
 						<div class="col-md-4">
 							<div class="form-group">
+								<label>Porcentaje de utilidad</label>
 								<div class="input-group">
 									<input id="porcentajeUtilidad" type="number" class="form-control porcentaje" min="0" value="40">
 									<span class="input-group-addon"><i class="fa fa-percent"></i></span>
@@ -162,6 +189,7 @@ $categorias = $objCategorias->getAll();
 
 
 						<div class="col-md-12">
+							<label>Imagen</label>
 							<div class="form-group">
 								<input type="file" id="imagenProducto" name="imagen" accept="image/jpeg">
 								<p class="help-block">Peso máximo de la imagen 2MB</p>

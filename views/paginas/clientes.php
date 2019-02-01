@@ -28,6 +28,7 @@
 							<th>Nombre</th>
 							<th>Email</th>
 							<th>Teléfono</th>
+							<th>RFC</th>
 							<th>Dirección</th>
 							<th>Ultima compra</th>
 							<th>Fecha de nacimiento</th>
@@ -101,6 +102,17 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>RFC</label>
+								<div class="input-group">
+									<div class="input-group-addon"><i class="fa fa-vcard-o"></i></div>
+									<input type="text" name="rfc" class="form-control">
+								</div>
+							</div>
+						</div>
+
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Dirección</label>

@@ -5,7 +5,9 @@ require_once '../models/model.php';
 
 use Spipu\Html2Pdf\Html2Pdf;
 
-if(!empty($_GET['id'])){	
+if(!empty($_GET['id'])){
+$configuracion = Model::getAll('configuracion')[0];
+
 $venta = Model::find('view_venta', 'id', $_GET['id']);
 $productos = Model::query("select * from view_detalle_venta where venta_id = {$_GET['id']}");
 

@@ -79,6 +79,7 @@
    <script type="text/javascript" src="views/bower_components/moment/min/moment-with-locales.min.js"></script>
    <script type="text/javascript" src="views/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
    <script src="views/bower_components/chart.js/Chart.min.js"></script>
+   <script src="views/plugins/countUp/countUp.min.js"></script>
 
    <!-- sweetalert -->
    <script src="views/bower_components/sweetalert/sweetalert2.all.min.js"></script>

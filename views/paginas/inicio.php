@@ -29,7 +29,7 @@ $total_vendedores = count(Model::findAll('view_usuario', 'perfil', 'vendedor'));
 				<!-- small box -->
 				<div class="small-box bg-orange">
 					<div class="inner">
-						<h3><?= $total_vendedores ?></h3>
+						<h3 class="count"><?= $total_vendedores ?></h3>
 
 						<p>Vendedores</p>
 					</div>
@@ -44,7 +44,7 @@ $total_vendedores = count(Model::findAll('view_usuario', 'perfil', 'vendedor'));
 				<!-- small box -->
 				<div class="small-box bg-green">
 					<div class="inner">
-						<h3><?= $total_clientes ?></h3>
+						<h3 class="count"><?= $total_clientes ?></h3>
 
 						<p>Clientes</p>
 					</div>
@@ -59,7 +59,7 @@ $total_vendedores = count(Model::findAll('view_usuario', 'perfil', 'vendedor'));
 				<!-- small box -->
 				<div class="small-box bg-blue">
 					<div class="inner">
-						<h3><?= $total_productos ?></h3>
+						<h3 class="count"><?= $total_productos ?></h3>
 
 						<p>Productos</p>
 					</div>
@@ -74,7 +74,7 @@ $total_vendedores = count(Model::findAll('view_usuario', 'perfil', 'vendedor'));
 				<!-- small box -->
 				<div class="small-box bg-red">
 					<div class="inner">
-						<h3><?= $total_categorias ?></h3>
+						<h3 class="count"><?= $total_categorias ?></h3>
 
 						<p>Categorias</p>
 					</div>
@@ -140,3 +140,4 @@ $total_vendedores = count(Model::findAll('view_usuario', 'perfil', 'vendedor'));
 <!-- /.content-wrapper -->
 
 </div>
+<script type="text/javascript" src="views/js/reportes.js"></script>

@@ -39,7 +39,7 @@ $clientes = Model::getAll('view_cliente');
 											<?php endforeach; ?>
 										</select>
 
-										<a class="input-group-addon btn btn-default btn-xs" data-toggle="modal" data-target="#modalCliente">Agregar cliente</a>
+										<!-- <a class="input-group-addon btn btn-default btn-xs" data-toggle="modal" data-target="#modalCliente">Agregar cliente</a> -->
 
 									</div>
 								</div>
@@ -59,7 +59,7 @@ $clientes = Model::getAll('view_cliente');
 											<div class="form-group">
 												<label>Inpuesto</label>
 												<div class="input-group">
-													<input id="impuestoVenta" type="number" class="form-control input-lg" min="0" max="100" name="impuesto" value="0" required>
+													<input id="impuestoVenta" type="number" class="form-control input-lg" min="0" max="100" name="impuesto" value="0" required readonly>
 													<span class="input-group-addon"><i class="fa fa-percent"></i></span>
 												</div>
 											</div>
@@ -246,3 +246,5 @@ $clientes = Model::getAll('view_cliente');
 </div>
 
 <!--====  End of AJAX LOADER   ====-->
+
+<script type="text/javascript" src="views/js/crear-ventas.js"></script>

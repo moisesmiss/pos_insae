@@ -22,15 +22,26 @@ table{
 	<table margin-top: 16px;">
 		<tr>
 			<th style="width: 30%; font-size: 40px;">
-				INSAE
+				<?php if(!empty($configuracion['logo'])): ?>
+					<img style="max-width: 100%;" src="../views/img/plantilla/<?= $configuracion['logo'] ?>">
+					<?php elseif(empty($configuracion['logo']) && !empty($configuracion['nombre_corto_empresa'])): ?>
+					<?= $configuracion['nombre_corto_empresa'] ?>
+				<?php endif; ?>
+				
 			</th>
 			<th style="width: 30%;">
-				Dirección: Colonia Gil y Saens, Calle Ayuntamiento.
+				<?php if(!empty($configuracion['direccion'])): ?>
+					Dirección: <?= $configuracion['direccion'] ?>
+				<?php endif; ?>
 			</th>
 			<th style="width: 30%;">
-				Telefono: (999) 999 9999
+				<?php if(!empty($configuracion['telefono'])): ?>
+					Teléfono: <?= $configuracion['telefono'] ?>
+				<?php endif; ?>
 				<br>
-				Correo electronico: insae@gmail.com
+				<?php if(!empty($configuracion['correo'])): ?>
+					Correo electronico: <?= $configuracion['correo'] ?>
+				<?php endif; ?>
 			</th>
 			<th style="width: 10%; color: tomato;">
 				Factura.N <?= $venta['id'] ?>
@@ -40,7 +51,7 @@ table{
 	<table class="bordered" style="margin-top: 30px; margin-left: 0;">
 		<tr>
 			<th style="width: 70%;">Cliente</th>
-			<td style="width: 30%;"><?= $venta['cliente'] ?></td>
+			<td style="width: 30%;"><?= ucwords($venta['cliente']) ?></td>
 		</tr>
 		<tr>
 			<th>Fecha</th>
@@ -72,7 +83,7 @@ table{
 		</tr>
 		<tr>
 			<th style="border: none; border-right: 1px solid black"></th>
-			<th>Impuesto (IVA - 16%)</th>
+			<th>Impuesto (IVA - <?= $venta['impuesto'] ?>%)</th>
 			<td>$ <?= number_format(($venta['neto'] / 100 * 16), 2) ?></td>
 		</tr>
 		<tr>

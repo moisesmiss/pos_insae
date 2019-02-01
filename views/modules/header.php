@@ -1,3 +1,6 @@
+<?php 
+$configuracion = Model::getAll('configuracion')[0];
+?>
 <header class="main-header">
 	<!--==============================
 	=            LOGOTIPO            =
@@ -9,7 +12,7 @@
 		</span>
 
 		<span class="logo-lg">
-			<span>INSAE </span>
+			<span><?= $configuracion['nombre_corto_empresa'] ?? 'POS' ?> </span>
 			<i class="fa fa-shopping-cart"></i>
 		</span>
 	</a>
@@ -28,13 +31,12 @@
 			<ul class="nav navbar-nav">
 				<li class="dropdown user user-menu">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<!-- <img src="views/img/usuarios/default/anonymous.png" class="user-image"> -->
-						<i class="fa fa-user"></i>
+						<img src="views/img/plantilla/img-user.png" class="user-image">
 						<span class="hidden-xs">Usuario: <?= ucwords($_SESSION['usuario']['nombre']) ?></span>
 					</a>
 					<ul class="dropdown-menu">
 						<li class="user-header">
-							<i class="fa fa-user" style="color: white; font-size: 2rem;"></i>
+							<img src="views/img/plantilla/img-user.png" class="img-circle">
 							<p><?= ucwords($_SESSION['usuario']['nombre']) ?></p>
 							<p><?= $_SESSION['usuario']['email'] ?></p>
 						</li>

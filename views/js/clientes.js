@@ -79,6 +79,7 @@ var options = {
 	{"data" : "nombre"},
 	{"data" : "correo"},
 	{"data" : "telefono"},
+	{"data": "rfc"},
 	{"data" : "direccion"},
 	{"data": "ultima_compra"},
 	{"data" : "fecha_nacimiento"},
@@ -156,6 +157,7 @@ $("#dtClientes tbody").on('click', '.btn-editar-cliente', function(){
 	$('#formCliente input[name=correo]').val(data.correo);
 	$('#formCliente input[name=fecha_nacimiento]').val(fechaNacimiento);
 	$('#formCliente input[name=telefono]').val(data.telefono);
+	$('#formCliente input[name=rfc]').val(data.rfc);
 	$('#formCliente input[name=direccion]').val(data.direccion);
 	$("#formCliente input[name=id]").val(data.id);
 

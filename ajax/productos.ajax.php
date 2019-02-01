@@ -10,7 +10,7 @@ function resizeImage($original_image_data, $original_width, $original_height, $n
     return $dst_img;
 }
 
-class AjaxCategorias{
+class AjaxProducto{
 	public $tabla = 'producto';
 
 	public function listar(){
@@ -60,6 +60,7 @@ class AjaxCategorias{
 				"precio_venta" => $_POST['precio_venta'],
 				"stock" => $_POST['stock'],
 				"categoria_id" => !empty($_POST['categoria_id']) ? $_POST['categoria_id'] : null,
+				"proveedor_id" => !empty($_POST['proveedor_id']) ? $_POST['proveedor_id'] : null,
 			];
 
 			if(empty($_POST['id'])){
@@ -123,7 +124,7 @@ class AjaxCategorias{
 =            ACCIONES            =
 ================================*/
 
-$producto = new AjaxCategorias();
+$producto = new AjaxProducto();
 switch ($_GET['action']) {
 	case 'listar':
 	echo $producto->listar();

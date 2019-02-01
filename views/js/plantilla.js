@@ -70,7 +70,8 @@ function getDataRow(btn){
 	if(tr.hasClass('child')){
 		tr = tr.prev();
 	}
-	var data = tablaUsuarios.DataTable().row(tr).data();
+	var tabla = tr.closest('table');
+	var data = tabla.DataTable().row(tr).data();
 	return data;
 }
 

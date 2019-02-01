@@ -12,6 +12,7 @@ class AjaxClientes{
 				'correo' => $_POST['correo'],
 				'fecha_nacimiento' => $_POST['fecha_nacimiento'],
 				'telefono' => $_POST['telefono'],
+				'rfc' => $_POST['rfc'],
 				'direccion' => $_POST['direccion'],
 			];
 			if(empty($_POST['id'])){
