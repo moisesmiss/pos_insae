@@ -19,7 +19,7 @@ $productosConBajoStock = Model::query('select count(*) from producto where stock
 	</div>
 	<section class="sidebar">
 		<ul class="sidebar-menu">
-			<li class="<?= revisarPaginaActiva('inicio') ?>"><a href="inicio"><i class="fa fa-home"></i><span> Inicio</span></a></li>
+			<li class="<?= revisarPaginaActiva('inicio') ?>"><a href="inicio"><i class="fa fa-dashboard"></i><span> Inicio</span></a></li>
 			<!-- <li class="treeview">
 				<a href="#">
 					<i class="fa fa-user"></i>

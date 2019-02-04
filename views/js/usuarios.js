@@ -137,22 +137,24 @@ $('#formAgregarUsuario').on('submit', function(event){
 	$.ajax({
 		url: 'ajax/usuarios.ajax.php?action=agregar',
 		type: 'post',
+		dataType: 'json',
 		data: datos,
 	})
-	.done(function(respuesta) {
+	.done(function(r) {
+		console.log("r", r);
 		tablaUsuarios.DataTable().ajax.reload();
 		$("#modalAgregarUsuario").modal('hide');
 		form[0].reset();
 
-		if(respuesta == 1){
+		if(r.respuesta == 1){
 			toast({
 				type: 'success',
-				title: 'Usuario agregado correctamente',
+				title: r.mensaje,
 			});
 		} else {
 			Swal({
 				type: 'error',
-				title: respuesta,
+				title: r.mensaje,
 				confirmButtonText: 'Aceptar',
 			});
 		}

@@ -42,8 +42,23 @@ class AjaxUsuarios{
 				exit;
 			}
 			$datosUsuario['persona_id'] = Model::insertGetId('persona', $datosPersona);
-			$respuesta = ModelUsuario::insert($this->tabla, $datosUsuario);
-			return $respuesta;
+			$resultado = ModelUsuario::insert($this->tabla, $datosUsuario);
+			if($resultado){
+				$respuesta = ['respuesta' => true, 'mensaje' => 'Usuario agregado correctamente'];
+			} else {
+				$respuesta = ['respuesta' => false, 'mensaje' => 'Error al agregar usuario'];
+			}
+
+			//agregar registro en bitácora
+			$datosBitacora = [
+				'accion' => 'agregar',
+				'modulo' => 'usuario',
+				'usuario_id' => $_SESSION['usuario']['persona_id'],
+				'datos_new' => json_encode(array_merge($datosUsuario, $datosPersona)),
+			];
+			Model::insert('bitacora', $datosBitacora);
+
+			return json_encode($respuesta);
 
 		}
 	}

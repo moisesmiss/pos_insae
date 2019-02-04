@@ -99,8 +99,8 @@ if($_SESSION['usuario']['perfil'] != 'administrador'){
 					?>
 					<div class="form-group">
 						<label>Perfil</label>
-						<select class="form-control" name="perfil_id">
-							<option selected disabled required>Seleccionar perfil</option>
+						<select class="form-control" name="perfil_id" required>
+							<option selected disabled>Seleccionar perfil</option>
 							<?php foreach($perfiles as $perfil): ?>
 								<option value="<?= $perfil['id'] ?>"><?= $perfil['nombre'] ?></option>
 							<?php endforeach; ?>
@@ -158,7 +158,7 @@ if($_SESSION['usuario']['perfil'] != 'administrador'){
 
 					<div class="form-group">
 						<label>Perfil</label>
-						<select class="form-control" name="perfil_id">
+						<select class="form-control" name="perfil_id" required>
 							<?php foreach($perfiles as $perfil): ?>
 								<option value="<?= $perfil['id'] ?>"><?= $perfil['nombre'] ?></option>
 							<?php endforeach; ?>
